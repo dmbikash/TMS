@@ -10,12 +10,42 @@ import 'package:http/http.dart' as http;
 import 'package:universal_html/html.dart' as html;
 class CreateUserProvider with ChangeNotifier{
 
+
+  ///ui part-------------
+
+  bool adminFlag = true;
+  bool traineeFlag = false;
+  bool trainerFlag = false;
+
+  void clickOnSideMenu(int c){
+     adminFlag = false;
+     traineeFlag = false;
+     trainerFlag = false;
+     if(c==1) adminFlag =true;
+     if(c==2) traineeFlag =true;
+     if(c==3) trainerFlag =true;
+     notifyListeners();
+
+  }
+
+
+
+
+
+
+
+
+
+
+  // ------------------------------------functionalities
+
   String _imageName = "";
-  var image;
+  var image = null;
 
 
 
-  Future<void> createAdmin(var batchInfo) async {
+  Future<void> createAdmin(var adminData) async {
+    print(adminData);
 
     String? token = getTokenFromLocalstorage();
     String? url = 'http://localhost:8090/auth/register';
@@ -33,12 +63,12 @@ class CreateUserProvider with ChangeNotifier{
       print(imageFile);
       request.files.add(imageFile);
     }
-    request.fields['fullName'] = "bandir put";
-    request.fields['contactNumber'] = "01fuck-cuck";
-    request.fields['email'] = "nya.com";
-    request.fields['gender'] = "magi";
-    request.fields['role'] = "ADMIN";
-    request.fields['password'] = "6969";
+    request.fields['fullName'] = adminData['name'];
+    request.fields['contactNumber'] = adminData['contact'];
+    request.fields['email'] = adminData['email'];
+    request.fields['gender'] = adminData['gender'];
+    request.fields['role'] = adminData['role'];
+    request.fields['password'] = adminData['password'];
 
 
     var response = await request.send();
@@ -54,7 +84,8 @@ class CreateUserProvider with ChangeNotifier{
     }
   }
 
-  Future<void> createTraine(var batchInfo) async {
+
+  Future<void> createTrainee(var batchInfo) async {
 
     String? token = getTokenFromLocalstorage();
     String? url = 'http://localhost:8090/auth/register';
@@ -178,7 +209,9 @@ class CreateUserProvider with ChangeNotifier{
       }else{
         _imageName = image.name;
       }
+      notifyListeners();
     } catch (e) {
+      notifyListeners();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(e.toString()),
