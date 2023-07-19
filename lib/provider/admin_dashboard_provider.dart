@@ -6,9 +6,9 @@ import "package:universal_html/html.dart" as html;
 
 class AdminDashboardProvider with ChangeNotifier{
 
-  Future<List<dynamic>>get_batch() async {
+  Future<List<dynamic>> getBatch() async {
 
-    String? token = getTokenFromLocalstorage();
+    String? token = getTokenFromLocalStorage();
     //print(token);
     if (token != null) {
       print('token ase- $token');
@@ -39,12 +39,41 @@ class AdminDashboardProvider with ChangeNotifier{
     return [];
   }
 
-  void saveTokenToLocalstorage(String token) {
+  Future<List<dynamic>> getBatchById(int batchId) async {
+
+    String? token = getTokenFromLocalStorage();
+
+    if (token != null) {
+      print('token ase- $token');
+      // Use the token for your API calls
+    } else {
+      print('The token is not available. Handle the user being logged out or not logged in');
+    }
+    print("ami call hochhi");
+
+    String url = "http://localhost:8090/batch/$batchId";
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {"Authorization": "Bearer $token"},
+    );
+
+    print(response.statusCode);
+    print(response.body);
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      print(data);
+      return data;
+    }
+    return [];
+  }
+
+  void saveTokenToLocalStorage(String token) {
     final storage = html.window.localStorage;
     storage['token'] = token;
   }
 
-  String? getTokenFromLocalstorage() {
+  String? getTokenFromLocalStorage() {
     final storage = html.window.localStorage;
     return storage['token'];
   }

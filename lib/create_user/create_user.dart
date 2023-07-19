@@ -23,15 +23,21 @@ class CreateUser extends StatefulWidget {
 
 class _CreateUserState extends State<CreateUser> {
   final userCreateFormKey = GlobalKey<FormState>();
-  final name=TextEditingController();
-  final email=TextEditingController();
-  final password=TextEditingController();
-  final contact=TextEditingController();
-  final gender=TextEditingController();
-  //final name=TextEditingController();// khalid egula korbe
-  //final name=TextEditingController();
-  //final name=TextEditingController();
-  //final name=TextEditingController();
+  final name = TextEditingController();
+  final email = TextEditingController();
+  final password = TextEditingController();
+  final contact =TextEditingController();
+  final gender = TextEditingController();
+  final designation = TextEditingController();
+  final joiningDate = TextEditingController();
+  final yearsOfExperience = TextEditingController();
+  final expertises = TextEditingController();
+  final dateOfBirth = TextEditingController();
+  final degreeName = TextEditingController();
+  final educationalInstitute = TextEditingController();
+  final cgpa = TextEditingController();
+  final passingYear = TextEditingController();
+  final presentAddress = TextEditingController();
 
 
   File? _pickedImage;
@@ -92,7 +98,7 @@ class _CreateUserState extends State<CreateUser> {
                                       child: Container(
                                         //decoration: box12Sidebar,
                                         child: TextLiquidFill(
-                                          text: 'CREATE Trainee',
+                                          text: 'CREATE TRAINEE',
                                           waveColor: sweetYellow,
                                           boxBackgroundColor: Colors.black,
                                           textStyle: black20,
@@ -109,7 +115,7 @@ class _CreateUserState extends State<CreateUser> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
                                         child: TextLiquidFill(
-                                          text: 'CREATE Trainer',
+                                          text: 'CREATE TRAINER',
                                           waveColor: sweetYellow,
                                           boxBackgroundColor: Colors.black,
                                           textStyle: black20,
@@ -145,7 +151,7 @@ class _CreateUserState extends State<CreateUser> {
                         ///                     ----------BODY--------
                         ///
                         /// --------------------------------------------------------------------
-                        if(createUserProvider.adminFlag)Expanded(
+                        if(createUserProvider.adminFlag) Expanded(
                           flex: 4,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 100),
@@ -264,265 +270,475 @@ class _CreateUserState extends State<CreateUser> {
                                           createUserProvider.createAdmin(adminData);
                                         }
                                       },
-                                      child: Text("HONK ME")),
+                                      child: Text("Register")),
                                 )
 
                               ],
                             ),
                           ),
                         ),
-                        if(createUserProvider.traineeFlag)Expanded(
-                          flex: 4,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 100),
-                            child: Column(
-                              children: [
-
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex:3,
-                                      child: Container(
-                                        //color: Colors.red,
-                                        width: width(context)*.5,
-                                        height: height(context)*.1,
-                                        child: TextFormField(
-                                          controller: name,
-                                          validator: (val){if(val!.isEmpty) return "required field";},
-                                          decoration: InputDecoration(
-                                            hintText: "TRAINEE"
+                        if (createUserProvider.traineeFlag) Expanded(
+                            flex: 4,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 100),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 3,
+                                        child: Container(
+                                          width: width(context) * .5,
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: name,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Name",
+                                            ),
                                           ),
                                         ),
-
                                       ),
-                                    ),
-                                    SizedBox(width: 10,),
-                                    Expanded(
-                                      flex: 1,
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        flex: 1,
                                         child: ElevatedButton(
-                                          onPressed: () { createUserProvider.pickImage(context); },
-                                          child: createUserProvider.image == null? Text("Select Image") : Icon(Icons.thumb_up_sharp,color: Colors.green,),
-
-                                        ),),
-                                  ],
-                                ),
-                                Container(
-                                  //color: Colors.red,
-                                  width: width(context)*.5,
-                                  height: height(context)*.1,
-                                  child: TextFormField(
-                                    controller: email,
-                                    validator: (val){if(val!.isEmpty) return "required field";},
-
-                                    decoration: InputDecoration(
-                                      hintText: "Email"
-                                    ),
-                                  ),
-
-                                ),
-                                Container(
-                                  //color: Colors.red,
-                                  width: width(context)*.5,
-                                  height: height(context)*.1,
-                                  child: TextFormField(
-                                    controller: password,
-                                    validator: (val){if(val!.isEmpty) return "required field";},
-
-                                    decoration: InputDecoration(
-                                        hintText: "PassWord"
-                                    ),
-                                  ),
-
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex:1,
-                                      child: Container(
-                                        //color: Colors.red,
-                                        height: height(context)*.1,
-                                        child: TextFormField(
-                                          controller: contact,
-                                          validator: (val){if(val!.isEmpty) return "required field";},
-
-                                          decoration: InputDecoration(
-                                            hintText: "Contact"
+                                          onPressed: () {
+                                            createUserProvider.pickImage(context);
+                                          },
+                                          child: createUserProvider.image == null
+                                              ? Text("Select Image")
+                                              : Icon(
+                                            Icons.thumb_up_sharp,
+                                            color: Colors.green,
                                           ),
                                         ),
-
                                       ),
-                                    ),
-                                    SizedBox(width: 10,),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        //color: Colors.red,
-                                        height: height(context)*.1,
-                                        child: TextFormField(
-                                          controller: gender,
-                                          validator: (val){if(val!.isEmpty) return "required field";},
-
-                                          decoration: InputDecoration(
-                                            hintText: "Gender"
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: email,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Email",
+                                            ),
                                           ),
                                         ),
-
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ElevatedButton(
-                                      //onPressed: () => _pickImage(ImageSource.camera),
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: password,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Password",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: contact,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Contact Number",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: gender,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Gender",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: dateOfBirth,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Date of Birth",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: cgpa,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "CGPA",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: educationalInstitute,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Educational Institute",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: passingYear,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Passing Year",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: degreeName,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Degree Name",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: presentAddress,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Present Address",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
                                       onPressed: () {
-                                        if(userCreateFormKey.currentState!.validate()){
+                                        if (userCreateFormKey.currentState!.validate()) {
                                           print("yeeee all ok---image diso to?");
 
-                                          var adminData = {
-                                            "name" : name.text,
-                                            "email" : email.text,
-                                            "password" : password.text,
-                                            "contact" : contact.text,
-                                            "gender" : gender.text,
-                                            "role" : "ADMIN",
+                                          var traineeData = {
+                                            "name": name.text,
+                                            "email": email.text,
+                                            "password": password.text,
+                                            "dateOfBirth": dateOfBirth.text,
+                                            "contact": contact.text,
+                                            "cgpa": cgpa.text,
+                                            "educationalInstitute": educationalInstitute.text,
+                                            "gender": gender.text,
+                                            "passingYear": passingYear.text,
+                                            "presentAddress": presentAddress.text,
+                                            "degreeName": degreeName.text,
+                                            "role": "TRAINEE",
                                           };
-                                          createUserProvider.createAdmin(adminData);
+                                          createUserProvider.createTrainee(traineeData);
                                         }
                                       },
-                                      child: Text("HONK ME")),
-                                )
-
-                              ],
+                                      child: Text("HONK ME"),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        if(createUserProvider.trainerFlag)Expanded(
-                          flex: 4,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 100),
-                            child: Column(
-                              children: [
-
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex:3,
-                                      child: Container(
-                                        //color: Colors.red,
-                                        width: width(context)*.5,
-                                        height: height(context)*.1,
-                                        child: TextFormField(
-                                          controller: name,
-                                          validator: (val){if(val!.isEmpty) return "required field";},
-                                          decoration: InputDecoration(
-                                            hintText: "TRAINER"
+                        if (createUserProvider.trainerFlag) Expanded(
+                            flex: 4,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 100),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 3,
+                                        child: Container(
+                                          width: width(context) * .5,
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: name,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Name",
+                                            ),
                                           ),
                                         ),
-
                                       ),
-                                    ),
-                                    SizedBox(width: 10,),
-                                    Expanded(
-                                      flex: 1,
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        flex: 1,
                                         child: ElevatedButton(
-                                          onPressed: () { createUserProvider.pickImage(context); },
-                                          child: createUserProvider.image == null? Text("Select Image") : Icon(Icons.thumb_up_sharp,color: Colors.green,),
-
-                                        ),),
-                                  ],
-                                ),
-                                Container(
-                                  //color: Colors.red,
-                                  width: width(context)*.5,
-                                  height: height(context)*.1,
-                                  child: TextFormField(
-                                    controller: email,
-                                    validator: (val){if(val!.isEmpty) return "required field";},
-
-                                    decoration: InputDecoration(
-                                      hintText: "Email"
-                                    ),
-                                  ),
-
-                                ),
-                                Container(
-                                  //color: Colors.red,
-                                  width: width(context)*.5,
-                                  height: height(context)*.1,
-                                  child: TextFormField(
-                                    controller: password,
-                                    validator: (val){if(val!.isEmpty) return "required field";},
-
-                                    decoration: InputDecoration(
-                                        hintText: "PassWord"
-                                    ),
-                                  ),
-
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex:1,
-                                      child: Container(
-                                        //color: Colors.red,
-                                        height: height(context)*.1,
-                                        child: TextFormField(
-                                          controller: contact,
-                                          validator: (val){if(val!.isEmpty) return "required field";},
-
-                                          decoration: InputDecoration(
-                                            hintText: "Contact"
+                                          onPressed: () {
+                                            createUserProvider.pickImage(context);
+                                          },
+                                          child: createUserProvider.image == null
+                                              ? Text("Select Image")
+                                              : Icon(
+                                            Icons.thumb_up_sharp,
+                                            color: Colors.green,
                                           ),
                                         ),
-
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    width: width(context) * .5,
+                                    height: height(context) * .1,
+                                    child: TextFormField(
+                                      controller: email,
+                                      validator: (val) {
+                                        if (val!.isEmpty) return "required field";
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Email",
                                       ),
                                     ),
-                                    SizedBox(width: 10,),
-                                    Expanded(
-                                      flex: 1,
-                                      child: Container(
-                                        //color: Colors.red,
-                                        height: height(context)*.1,
-                                        child: TextFormField(
-                                          controller: gender,
-                                          validator: (val){if(val!.isEmpty) return "required field";},
-
-                                          decoration: InputDecoration(
-                                            hintText: "Gender"
+                                  ),
+                                  Container(
+                                    width: width(context) * .5,
+                                    height: height(context) * .1,
+                                    child: TextFormField(
+                                      controller: password,
+                                      validator: (val) {
+                                        if (val!.isEmpty) return "required field";
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Password",
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: contact,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Contact Number",
+                                            ),
                                           ),
                                         ),
-
+                                      ),
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: gender,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Gender",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: designation,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Designation",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: joiningDate,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Joining Date",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: yearsOfExperience,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Years of Experience",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          height: height(context) * .1,
+                                          child: TextFormField(
+                                            controller: expertises,
+                                            validator: (val) {
+                                              if (val!.isEmpty) return "required field";
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: "Expertises",
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    width: width(context) * .5,
+                                    height: height(context) * .1,
+                                    child: TextFormField(
+                                      controller: presentAddress,
+                                      validator: (val) {
+                                        if (val!.isEmpty) return "required field";
+                                      },
+                                      decoration: InputDecoration(
+                                        hintText: "Present Address",
                                       ),
                                     ),
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ElevatedButton(
-                                      //onPressed: () => _pickImage(ImageSource.camera),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
                                       onPressed: () {
-                                        if(userCreateFormKey.currentState!.validate()){
-                                          print("yeeee all ok---image diso to?");
+                                        if (userCreateFormKey.currentState!.validate()) {
 
-                                          var adminData = {
-                                            "name" : name.text,
-                                            "email" : email.text,
-                                            "password" : password.text,
-                                            "contact" : contact.text,
-                                            "gender" : gender.text,
-                                            "role" : "ADMIN",
+                                          var trainerData = {
+                                            "name": name.text,
+                                            "email": email.text,
+                                            "password": password.text,
+                                            "designation": designation.text,
+                                            "joiningDate": joiningDate.text,
+                                            "yearsOfExperience": yearsOfExperience.text,
+                                            "expertises": expertises.text,
+                                            "contact": contact.text,
+                                            "presentAddress": presentAddress.text,
+                                            "role": "TRAINER",
                                           };
-                                          createUserProvider.createAdmin(adminData);
+
+                                          createUserProvider.createTrainer(trainerData);
                                         }
                                       },
-                                      child: Text("HONK ME")),
-                                )
-
-                              ],
+                                      child: Text("Register Trainer"),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
+
 
                         Expanded(
                           flex: 2,

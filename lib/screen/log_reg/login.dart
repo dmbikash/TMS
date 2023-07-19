@@ -15,77 +15,160 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
-
+class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+    _animation = Tween<double>(begin: 1.0, end: 1.1).animate(_animationController);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<LoginProvider>(
-        builder: (context, loginProvider, child){
-          return Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    validator: (val){
-                      if(val!.isEmpty){
-                        return "khali rakha jabena";
-                      }
-                    },
-                    controller: _email,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    validator: (val){
-                      if(val!.isEmpty){
-                        return "khali rakha jabena";
-                      }
-                    },
-                    controller: _password,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    if(_formKey.currentState!.validate()){
-                      // After successful login
-                     // await loginProvider.get_role( _email.text, _password.text);
-                      await loginProvider.get_role( 'superadmin@gmail.com', 'admin');
-                      print(loginProvider.role);
-                      if(loginProvider.role == "TRAINEE"){
-                        Navigator.pushNamed(context, "TraineeDashboard");
-                      }else  if(loginProvider.role == "ADMIN"){
-                        Navigator.pushNamed(context, "AdminDashboard");
-                      }else  if(loginProvider.role == "TRAINER"){
-                        Navigator.pushNamed(context, "TrainerDashboard");
-                      }
-                      else{
-                        print("golmal hain vai sab golmall hain");
+      body: Center(
+        child: Container(
+          width: 350,
+          padding: EdgeInsets.all(24),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Consumer<LoginProvider>(
+            builder: (context, loginProvider, child) {
+              return Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      'TMS', // Your app title
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue, // Customize the color as per your design
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Your Favorite Training Management System',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    TextFormField(
+                      validator: (val) {
+                        if (val!.isEmpty) {
+                          return 'Please enter your email';
+                        }
+                      },
+                      controller: _email,
+                      decoration: InputDecoration(
+                        labelText: 'Email or Phone Number',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    TextFormField(
+                      validator: (val) {
+                        if (val!.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                      },
+                      controller: _password,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        border: OutlineInputBorder(),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          // Implement forgot password functionality here
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
 
-                    }
-                    }else{
-                      print("form invalid");
-                    }
-                    //Navigator.pushNamed(context, "Home");
-                  },
-                  child: const Text("Login"),
-                )
-              ],
-            ),
-          );
-        },
+
+                          _animationController.forward().then((_) async {
+
+                            await loginProvider.get_role(_email.text, _password.text);
+
+                            if (loginProvider.role == "TRAINEE") {
+                              Navigator.pushNamed(context, "TraineeDashboard");
+                            } else if (loginProvider.role == "ADMIN") {
+                              Navigator.pushNamed(context, "AdminDashboard");
+                            } else if (loginProvider.role == "TRAINER") {
+                              Navigator.pushNamed(context, "TrainerDashboard");
+                            } else {
+                              print("Invalid role");
+                            }
+                          });
+                        } else {
+                          print("Form invalid");
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+                      ),
+                      child: Text(
+                        "Log In",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
-
-
 }

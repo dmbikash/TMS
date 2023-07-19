@@ -1,20 +1,16 @@
 import 'dart:convert';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:intl/intl.dart'; // Import the intl package
-
+import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/quickalert.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:training_management_system/components/box_decorations.dart';
 import 'package:training_management_system/components/color.dart';
 import 'package:training_management_system/components/text_style.dart';
-import 'package:training_management_system/main.dart';
 import 'package:training_management_system/provider/admin_dashboard_provider.dart';
 import '../../components/my_app_bar.dart';
 import '../../components/screen_size.dart';
-import 'dashboard_components/drawyer.dart';
 import "package:universal_html/html.dart" as html;
 
 class AdminDashboard extends StatefulWidget {
@@ -30,7 +26,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
   final _startDateController = TextEditingController();
   final _endDateController = TextEditingController();
 
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectStartDate(BuildContext context) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -73,12 +69,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
       return Scaffold(
         //backgroundColor: Color(0xFF3C4043),
         appBar: MyAppBar(
-          title: 'Dashboard',
+          title: 'Dashboard: ADMIN',
         ),
-        // drawer: const SizedBox(
-        //   width: 250,
-        //   child: Drawyer(),
-        // ),
+
         floatingActionButton: Container(
           height: 100,
           width: 200,
@@ -131,7 +124,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                   controller: _startDateController,
                                   readOnly: true,
                                   // Make the field read-only to prevent manual input
-                                  onTap: () => _selectDate(context),
+                                  onTap: () => _selectStartDate(context),
                                   decoration: const InputDecoration(
                                     labelText: 'Start Date',
                                     hintText: 'Select a date',
@@ -172,6 +165,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
           ),
         ),
+
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -181,6 +175,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    //side menu
                     Expanded(
                       flex: 2,
                       child: Padding(
@@ -264,117 +259,113 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     ),
                     //body
                     Expanded(
-                      flex: 4,
-                      child: FutureBuilder<List<dynamic>>(
-                        future: adminProvider.get_batch(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                //color: Colors.green,
-                                child: ListView.builder(
-                                    itemCount: snapshot.data?.length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                      flex: 6,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+                        child: FutureBuilder<List<dynamic>>(
+                          future: adminProvider.getBatch(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              // Create a list of batches with 3 batches in each row
+                              List<Widget> rowsOfCards = [];
+                              int batchSize = 3;
+                              int totalBatches = snapshot.data!.length;
+                              double maxWidth = width(context) * 0.5/3; // Maximum width for each card
+                              for (int i = 0; i < totalBatches; i += batchSize) {
+                                int endIndex = i + batchSize;
+                                if (endIndex > totalBatches) {
+                                  endIndex = totalBatches;
+                                }
+
+                                List<Widget> rowChildren = [];
+                                for (int j = i; j < endIndex; j++) {
+                                  rowChildren.add(
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: InkWell(
+                                        onTap: (){
+                                          String batchId = (snapshot.data![j]['batchId']).toString();
+                                          saveBatchIdInLocalStorage(batchId);
+                                          Navigator.pushNamed(context, 'AdminBatchInfo');
+                                        },
                                         child: Container(
-                                          width: width(context) * .22,
-                                          height: height(context) * .25,
+                                          constraints: BoxConstraints(maxWidth: maxWidth),
                                           decoration: box12,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                        '${snapshot.data![index]['batchName']}',
-                                                        style: black40,
-                                                        overflow: TextOverflow.ellipsis,
-                                                    ),
-
-                                                    Text(
-                                                      'Java SE',
-                                                      style: grey20,
-                                                    ),
-                                                  ],
-                                                ),
+                                              Text(
+                                                '${snapshot.data![j]['batchName']}',
+                                                style: black40,
+                                                overflow: TextOverflow.ellipsis,
                                               ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-
-                                                // batch er divider er porer part
+                                              Text(
+                                                "Batch ID: ${snapshot.data![j]['batchId']}",
+                                                style: grey20,
+                                              ),
+                                              SizedBox(height: 10),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.black54,
+                                                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                                                ),
+                                                height: 2,
+                                              ),
+                                              SizedBox(height: 10),
+                                              Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 18.0),
-                                                    child: Container(
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.black54,
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      30))),
-                                                      height:
-                                                          height(context) * .15,
-                                                      width: 2,
-                                                    ),
+                                                  Text(
+                                                    "Start Date: ${dateFormatter(snapshot.data![j]['startDate'])}",
+                                                    style: grey20,
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(8.0),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          "Start Date: ${dateFormatter(snapshot.data![index]['startDate'])}",
-                                                          style: grey20,
-                                                        ),
-                                                        Text(
-                                                          "EndDate: ${dateFormatter(snapshot.data![index]['endDate'])}",
-                                                          style: grey20,
-                                                        ),
-                                                        Text(
-                                                          "Total Trainers : ${(snapshot.data![index]['trainers'].length)}      ",
-                                                          style: black20,
-                                                        ),
-                                                      ],
-                                                    ),
+                                                  Text(
+                                                    "EndDate: ${dateFormatter(snapshot.data![j]['endDate'])}",
+                                                    style: grey20,
+                                                  ),
+                                                  Text(
+                                                    "Total Trainers : ${(snapshot.data![j]['trainers'].length)}      ",
+                                                    style: black20,
                                                   ),
                                                 ],
                                               ),
                                             ],
                                           ),
                                         ),
-                                      );
-                                    }),
-                              ),
-                            );
-                          } else if (snapshot.hasError) {
-                            return Text(
-                                "error khaise ekhane --${snapshot.error}");
-                          }
-                          // By default, show a loading spinner
-                          return const CircularProgressIndicator();
-                        },
+                                      ),
+                                    ),
+                                  );
+                                }
+
+                                rowsOfCards.add(
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: rowChildren,
+                                  ),
+                                );
+                              }
+
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  //color: Colors.green,
+                                  child: Column(
+                                    children: rowsOfCards,
+                                  ),
+                                ),
+                              );
+                            } else if (snapshot.hasError) {
+                              return Text("error khaise ekhane --${snapshot.error}");
+                            }
+                            // By default, show a loading spinner
+                            return const CircularProgressIndicator();
+                          },
+                        ),
                       ),
                     ),
+
                     Expanded(
                       flex: 2,
                       child: Container(
@@ -395,7 +386,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
     //List categoryDataList, BuildContext context;
     //print(categoryDataList[0]);
 
-    String? token = getTokenFromLocalstorage();
+    String? token = getTokenFromLocalStorage();
     String? url = 'http://localhost:8090/batch/create';
     //print(url!+token!);
     final headers = {
@@ -424,7 +415,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
     }
   }
 
-  String? getTokenFromLocalstorage() {
+  String? getTokenFromLocalStorage() {
     final storage = html.window.localStorage;
     return storage['token'];
   }
@@ -434,5 +425,14 @@ class _AdminDashboardState extends State<AdminDashboard> {
 
   }
 
+  void saveBatchIdInLocalStorage(String batchId) {
+    final storage = html.window.localStorage;
+    storage['batchId'] = batchId;
+  }
+
+  String? getBatchIdInLocalStorage() {
+    final storage = html.window.localStorage;
+    return storage['batchId'];
+  }
 
 }
