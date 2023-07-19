@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -81,91 +80,94 @@ class _AdminBatchInfoState extends State<AdminBatchInfo> {
               children: [
 
                 Container(
-                  width: width(context),
+                  width: width(context)*.95,
                   height: height(context) * 0.8,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
                         flex: 2,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 38.0),
-                          child: Container(
-                            height: height(context) * .80,
-                            decoration: box12Sidebar,
-                            //color: Colors.orangeAccent,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                InkWell(
-                                  onTap: (){},
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      //decoration: box12Sidebar,
-                                      child: TextLiquidFill(
-                                        text: 'Profile',
-                                        waveColor: sweetYellow,
-                                        boxBackgroundColor: Colors.black,
-                                        textStyle: black20,
-                                        boxHeight: 70,
+                        child: Container(
+                          color: Colors.green,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 38.0),
+                            child: Container(
+                              height: height(context) * .80,
+                              decoration: box12Sidebar,
+                              //color: Colors.orangeAccent,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  InkWell(
+                                    onTap: (){},
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        //decoration: box12Sidebar,
+                                        child: TextLiquidFill(
+                                          text: 'Profile',
+                                          waveColor: sweetYellow,
+                                          boxBackgroundColor: Colors.black,
+                                          textStyle: black20,
+                                          boxHeight: 70,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: (){
-                                    //Navigator.pop(context);
-                                    Navigator.pushNamed(context, "AdminDashboard");
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      //decoration: box12Sidebar,
-                                      child: TextLiquidFill(
-                                        text: 'BATCH',
-                                        waveColor: sweetYellow,
-                                        boxBackgroundColor: Colors.black,
-                                        textStyle: black20,
-                                        boxHeight: 70,
+                                  InkWell(
+                                    onTap: (){
+                                      //Navigator.pop(context);
+                                      Navigator.pushNamed(context, "AdminDashboard");
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        //decoration: box12Sidebar,
+                                        child: TextLiquidFill(
+                                          text: 'BATCH',
+                                          waveColor: sweetYellow,
+                                          boxBackgroundColor: Colors.black,
+                                          textStyle: black20,
+                                          boxHeight: 70,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: (){
-                                    Navigator.pushNamed(context, "TraineeRegister");
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      child: TextLiquidFill(
-                                        text: 'CREATE ACCOUNT',
-                                        waveColor: sweetYellow,
-                                        boxBackgroundColor: Colors.black,
-                                        textStyle: black20,
-                                        boxHeight: 70,
+                                  InkWell(
+                                    onTap: (){
+                                      Navigator.pushNamed(context, "TraineeRegister");
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        child: TextLiquidFill(
+                                          text: 'CREATE ACCOUNT',
+                                          waveColor: sweetYellow,
+                                          boxBackgroundColor: Colors.black,
+                                          textStyle: black20,
+                                          boxHeight: 70,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: (){},
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      child: TextLiquidFill(
-                                        text: 'Logout',
-                                        waveColor: sweetYellow,
-                                        boxBackgroundColor: Colors.black,
-                                        textStyle: black20,
-                                        boxHeight: 70,
+                                  InkWell(
+                                    onTap: (){},
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        child: TextLiquidFill(
+                                          text: 'Logout',
+                                          waveColor: sweetYellow,
+                                          boxBackgroundColor: Colors.black,
+                                          textStyle: black20,
+                                          boxHeight: 70,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
 
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -173,164 +175,180 @@ class _AdminBatchInfoState extends State<AdminBatchInfo> {
                       //body
                       Expanded(                                // dashboard
                         flex: 6,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(100, 60, 0, 0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .start,
+                        child: Container(
+                          color: Colors.purple,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(100, 60, 0, 0),
+                            child: Container(
+                              color: Colors.red,
+                              child: Column(
                                 children: [
-                                  InkWell(
-                                    onTap: () {},
-                                    child: buildDashboardCard(
-                                      title: 'Trainer Assign',
-                                      subtitle: 'Assign Trainer in Batch',
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: buildDashboardCard(
-                                      title: 'Assign Trainee',
-                                      subtitle: 'Assign Trainee in Batch',
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      QuickAlert.show(
-                                          onConfirmBtnTap: (){
-                                            if(_courseFormKey.currentState!.validate()){
-                                              postCourse({
-                                                'courseName': _courseName.text,
-                                                'description': _description.text,
-                                                'startDate': _startDateCourseController.text,
-                                                'endDate': _endDateCourseController.text,
-                                              });
-                                            }
-                                          },
-                                          context: context,
-                                          type: QuickAlertType.info,
-                                          confirmBtnColor: sweetYellow,
-                                          confirmBtnText: "Create",
-                                          title: "Create Course",
-                                          //customAsset: FlutterLogo(),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          print("object");
 
-                                          widget: Form(
-                                            key: _courseFormKey,
-                                            child: Column(
-                                              children: [
+                                              Navigator.pushNamed(context, "AddTrainerToBatch");
 
-                                                TextFormField(
-                                                  validator: (val){
-                                                    if(val!.isEmpty) return "value des nai oak thu";
-                                                  },
-                                                  controller: _courseName,
-                                                  decoration: InputDecoration(hintText: "Course Name"),
-                                                ),
 
-                                                TextFormField(
-                                                  validator: (val){
-                                                    if(val!.isEmpty) return "value des nai oak thu";
-                                                  },
-                                                  controller: _description,
-                                                  decoration: InputDecoration(hintText: "Description"),
-                                                ),
 
-                                                Container(
-                                                  height: 100,
-                                                  width: 500,
-                                                  //color: Colors.red,
-                                                  child: Row(
-                                                    children: [
-                                                      Expanded(
-                                                        flex: 1,
-                                                        child: TextFormField(
-                                                          validator: (val){
-                                                            if(val!.isEmpty) return "value des nai oak thu";
-                                                          },
-                                                          controller: _startDateCourseController,
-                                                          readOnly: true,
-                                                          // Make the field read-only to prevent manual input
-                                                          onTap: () => _selectStartDate(context),
-                                                          decoration: const InputDecoration(
-                                                            labelText: 'Start Date',
-                                                            hintText: 'Select a date',
-                                                            suffixIcon: Icon(Icons.calendar_today),
-                                                            border: OutlineInputBorder(),
+                                        },
+                                        child: buildDashboardCard(
+                                          title: 'Trainer Assign',
+                                          subtitle: 'Assign Trainer in Batch',
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {},
+                                        child: buildDashboardCard(
+                                          title: 'Assign Trainee',
+                                          subtitle: 'Assign Trainee in Batch',
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          QuickAlert.show(
+                                              onConfirmBtnTap: (){
+                                                if(_courseFormKey.currentState!.validate()){
+                                                  postCourse({
+                                                    'courseName': _courseName.text,
+                                                    'description': _description.text,
+                                                    'startDate': _startDateCourseController.text,
+                                                    'endDate': _endDateCourseController.text,
+                                                  });
+                                                }
+                                              },
+                                              context: context,
+                                              type: QuickAlertType.info,
+                                              confirmBtnColor: sweetYellow,
+                                              confirmBtnText: "Create",
+                                              title: "Create Course",
+                                              //customAsset: FlutterLogo(),
+
+                                              widget: Form(
+                                                key: _courseFormKey,
+                                                child: Column(
+                                                  children: [
+
+                                                    TextFormField(
+                                                      validator: (val){
+                                                        if(val!.isEmpty) return "value des nai oak thu";
+                                                      },
+                                                      controller: _courseName,
+                                                      decoration: InputDecoration(hintText: "Course Name"),
+                                                    ),
+
+                                                    TextFormField(
+                                                      validator: (val){
+                                                        if(val!.isEmpty) return "value des nai oak thu";
+                                                      },
+                                                      controller: _description,
+                                                      decoration: InputDecoration(hintText: "Description"),
+                                                    ),
+
+                                                    Container(
+                                                      height: 100,
+                                                      width: 500,
+                                                      //color: Colors.red,
+                                                      child: Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: TextFormField(
+                                                              validator: (val){
+                                                                if(val!.isEmpty) return "value des nai oak thu";
+                                                              },
+                                                              controller: _startDateCourseController,
+                                                              readOnly: true,
+                                                              // Make the field read-only to prevent manual input
+                                                              onTap: () => _selectStartDate(context),
+                                                              decoration: const InputDecoration(
+                                                                labelText: 'Start Date',
+                                                                hintText: 'Select a date',
+                                                                suffixIcon: Icon(Icons.calendar_today),
+                                                                border: OutlineInputBorder(),
+                                                              ),
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 100,
-                                                      ),
-                                                      Expanded(
-                                                        flex: 1,
-                                                        child: TextFormField(
-                                                          validator: (val){
-                                                            if(val!.isEmpty) return "value des nai oak thu";
-                                                          },
-                                                          controller: _endDateCourseController,
-                                                          readOnly: true,
-                                                          onTap: () => _selectEndDate(context),
-                                                          decoration: const InputDecoration(
-                                                            labelText: 'End Date',
-                                                            hintText: 'Select an end date',
-                                                            suffixIcon: Icon(Icons.calendar_today),
-                                                            border: OutlineInputBorder(),
+                                                          const SizedBox(
+                                                            width: 100,
                                                           ),
-                                                        ),
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: TextFormField(
+                                                              validator: (val){
+                                                                if(val!.isEmpty) return "value des nai oak thu";
+                                                              },
+                                                              controller: _endDateCourseController,
+                                                              readOnly: true,
+                                                              onTap: () => _selectEndDate(context),
+                                                              decoration: const InputDecoration(
+                                                                labelText: 'End Date',
+                                                                hintText: 'Select an end date',
+                                                                suffixIcon: Icon(Icons.calendar_today),
+                                                                border: OutlineInputBorder(),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
+                                                    ),
+                                                    // TextFormField(),
+                                                    //TextFormField(),
+                                                  ],
                                                 ),
-                                                // TextFormField(),
-                                                //TextFormField(),
-                                              ],
-                                            ),
-                                          ));
-                                    },
-                                    child: buildDashboardCard(
-                                      title: 'Create Course',
-                                      subtitle: 'Create Assignment',
-                                    ),
+                                              ));
+                                        },
+                                        child: buildDashboardCard(
+                                          title: 'Create Course',
+                                          subtitle: 'Create Assignment',
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 20),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .start,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        child: buildDashboardCard(
+                                          title: 'Batch Info',
+                                          subtitle: 'Check and Edit Batch Info',
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {},
+                                        child: buildDashboardCard(
+                                          title: 'Scheduling',
+                                          subtitle: 'View or Add batch Schedule',
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {},
+                                        child: buildDashboardCard(
+                                          title: 'Course Information',
+                                          subtitle: 'View and Update All courses',
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment
-                                    .start,
-                                children: [
-                                  InkWell(
-                                    onTap: () {},
-                                    child: buildDashboardCard(
-                                      title: 'Batch Info',
-                                      subtitle: 'Check and Edit Batch Info',
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: buildDashboardCard(
-                                      title: 'Scheduling',
-                                      subtitle: 'View or Add batch Schedule',
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: buildDashboardCard(
-                                      title: 'Course Information',
-                                      subtitle: 'View and Update All courses',
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
                       Expanded(
                         flex: 2,
-                        child: Container(),
+                        child: Container(
+                          height: height(context)*.80,
+                          color: Colors.lime,
+                          child: Text("ss"),
+                        ),
                       ),
                     ],
                   ),
