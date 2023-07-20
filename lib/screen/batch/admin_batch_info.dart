@@ -6,14 +6,15 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:training_management_system/provider/admin_batch_info_provider.dart';
+import 'package:training_management_system/provider/admin/admin_batch_info_provider.dart';
 import 'package:http/http.dart' as http;
+import "package:universal_html/html.dart" as html;
 import '../../components/box_decorations.dart';
 import '../../components/color.dart';
 import '../../components/my_app_bar.dart';
 import '../../components/screen_size.dart';
 import '../../components/text_style.dart';
-import "package:universal_html/html.dart" as html;
+
 
 
 class AdminBatchInfo extends StatefulWidget {
@@ -303,13 +304,20 @@ class _AdminBatchInfoState extends State<AdminBatchInfo> {
                                       ),
                                     ],
                                   ),
+
                                   SizedBox(height: 20),
+
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment
                                         .start,
                                     children: [
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          final storage = html.window.localStorage;
+                                          String? batchId =  storage['batchId'];
+                                          saveBatchIdInLocalStorage(batchId!);
+                                          Navigator.pushNamed(context, "BatchDetails");
+                                        },
                                         child: buildDashboardCard(
                                           title: 'Batch Info',
                                           subtitle: 'Check and Edit Batch Info',
@@ -323,7 +331,12 @@ class _AdminBatchInfoState extends State<AdminBatchInfo> {
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          final storage = html.window.localStorage;
+                                          String? batchId =  storage['batchId'];
+                                          saveBatchIdInLocalStorage(batchId!);
+                                          Navigator.pushNamed(context, "CourseInfo");
+                                        },
                                         child: buildDashboardCard(
                                           title: 'Course Information',
                                           subtitle: 'View and Update All courses',

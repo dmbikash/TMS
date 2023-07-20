@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:training_management_system/provider/addTraineeToBatch_provider.dart';
+import 'package:training_management_system/provider/admin/addTraineeToBatch_provider.dart';
 import 'package:universal_html/html.dart' as html;
 
 import '../../components/box_decorations.dart';
@@ -33,7 +33,7 @@ class _AddTraineeToBatchState extends State<AddTraineeToBatch> {
                 children: [
                   Container(
                     width: width(context) * 1,
-                    height: height(context) * 1,
+                    height: height(context) * .9,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -149,7 +149,7 @@ class _AddTraineeToBatchState extends State<AddTraineeToBatch> {
                                       return SingleChildScrollView(
                                         scrollDirection: Axis.horizontal, // Enable horizontal scrolling
                                         child: DataTable(
-                                          dataRowHeight: 60,
+                                          dataRowMaxHeight: 80,
                                           headingRowHeight: 70,
                                           headingTextStyle: TextStyle(
                                             fontWeight: FontWeight.bold,

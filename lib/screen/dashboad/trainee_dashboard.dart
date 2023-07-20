@@ -1,15 +1,15 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:training_management_system/provider/trainer_dashboard_provider.dart';
+import 'package:training_management_system/provider/trainer/trainer_dashboard_provider.dart';
 
 import '../../components/box_decorations.dart';
 import '../../components/color.dart';
 import '../../components/my_app_bar.dart';
 import '../../components/screen_size.dart';
 import '../../components/text_style.dart';
-import '../../provider/admin_dashboard_provider.dart';
-import '../../provider/trainee_dashboard_provider.dart';
+import '../../provider/admin/admin_dashboard_provider.dart';
+import '../../provider/trainee/trainee_dashboard_provider.dart';
 
 
 
@@ -208,7 +208,5 @@ class _TraineeDashboardState extends State<TraineeDashboard> {
       ),
     );
   }
-
-
 
 }

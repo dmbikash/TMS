@@ -8,7 +8,7 @@ import 'package:quickalert/quickalert.dart';
 import 'package:training_management_system/components/box_decorations.dart';
 import 'package:training_management_system/components/color.dart';
 import 'package:training_management_system/components/text_style.dart';
-import 'package:training_management_system/provider/admin_dashboard_provider.dart';
+import 'package:training_management_system/provider/admin/admin_dashboard_provider.dart';
 import '../../components/my_app_bar.dart';
 import '../../components/screen_size.dart';
 import "package:universal_html/html.dart" as html;
@@ -35,11 +35,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
     );
 
     if (pickedDate != null && pickedDate != DateTime.now()) {
-      // Format the selected date
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-      print('Selected date: $formattedDate');
-
-      // Update the text controller with the selected date
       _startDateController.text = formattedDate;
     }
   }
@@ -53,11 +49,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
     );
 
     if (pickedDate != null && pickedDate != DateTime.now()) {
-      // Format the selected date
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-      print('Selected end date: $formattedDate');
-
-      // Update the text controller with the selected date
       _endDateController.text = formattedDate;
     }
   }
@@ -84,11 +76,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
               QuickAlert.show(
                 onConfirmBtnTap: (){
                   if(_batchFormKey.currentState!.validate()){
-                      postBatch({
+                      adminProvider.postBatch({
                         'name': _batchName.text,
                         'start_date': _startDateController.text,
                         'end_date': _endDateController.text,
-                      });
+                      }, context);
                     }
                   },
                   context: context,
@@ -382,38 +374,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
     });
   }
 
-  Future<void> postBatch(var batchInfo) async {
-    //List categoryDataList, BuildContext context;
-    //print(categoryDataList[0]);
 
-    String? token = getTokenFromLocalStorage();
-    String? url = 'http://localhost:8090/batch/create';
-    //print(url!+token!);
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    };
-    final data = {
-      "batchName": batchInfo['name'],
-      "startDate": batchInfo['start_date'],
-      "endDate": batchInfo['end_date'],
-      "trainers": null,
-
-    };
-    final jsonBody = jsonEncode(data);
-    final response =
-    await http.post(Uri.parse(url), headers: headers, body: jsonBody);
-
-    if (response.statusCode == 200) {
-      print(response.body);
-      // Data posted successfully
-      print('Data posted successfully');
-      Navigator.pop(context);
-    } else {
-      // Error occurred while posting data
-      print('Error occurred while posting data: ${response.body}');
-    }
-  }
 
   String? getTokenFromLocalStorage() {
     final storage = html.window.localStorage;

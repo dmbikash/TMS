@@ -8,9 +8,6 @@ class AddTrainerToBatchProvider with ChangeNotifier {
 
   List<int> selectedTrainers = [];
 
-  //get http => null;
-  //final http.Client _httpClient = http.Client();
-
   void addToSelectedTrainers(int c){
     selectedTrainers.add(c);
     notifyListeners();
@@ -53,7 +50,6 @@ class AddTrainerToBatchProvider with ChangeNotifier {
     final storage = html.window.localStorage;
     return storage['batchId'];
   }
-
 
   String? getTokenFromLocalStorage() {
     final storage = html.window.localStorage;

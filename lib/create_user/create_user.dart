@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:training_management_system/components/my_app_bar.dart';
-import 'package:training_management_system/provider/create_user_provider.dart';
+import 'package:training_management_system/provider/admin/create_user_provider.dart';
 
 import '../components/box_decorations.dart';
 import '../components/color.dart';

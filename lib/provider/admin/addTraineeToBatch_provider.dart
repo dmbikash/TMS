@@ -8,9 +8,6 @@ class AddTraineeToBatchProvider with ChangeNotifier {
 
   List<int> selectedTrainees = [];
 
-  //get http => null;
-  final http.Client _httpClient = http.Client();
-
   void addToSelectedTrainees(int c){
     selectedTrainees.add(c);
     notifyListeners();
@@ -23,12 +20,6 @@ class AddTraineeToBatchProvider with ChangeNotifier {
   Future<List<dynamic>> getTrainees() async {
 
     String? token = getTokenFromLocalStorage();
-
-    if (token != null) {
-      print('token ase- $token');
-    } else {
-      print('The token is not available. Handle the user being logged out or not logged in');
-    }
 
     String url = "http://localhost:8090/trainee/unassigned";
     final response = await http.get(
@@ -64,14 +55,11 @@ class AddTraineeToBatchProvider with ChangeNotifier {
 
     final jsonBody = jsonEncode(data);
 
-    //print(jsonBody);
+
     final response = await http.post(Uri.parse(url), headers: headers, body: jsonBody);
 
     if (response.statusCode == 200) {
-      print(response.body);
       print('Data posted successfully after return');
-    } else {
-      print('Error occurred while posting data: ${response.body}');
     }
   }
 
