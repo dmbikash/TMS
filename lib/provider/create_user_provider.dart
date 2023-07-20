@@ -29,10 +29,6 @@ class CreateUserProvider with ChangeNotifier{
   }
 
 
-
-
-
-
   // ------------------------------------functionalities
 
   String _imageName = "";

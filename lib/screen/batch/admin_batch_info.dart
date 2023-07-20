@@ -78,17 +78,15 @@ class _AdminBatchInfoState extends State<AdminBatchInfo> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-
                 Container(
-                  width: width(context)*.95,
-                  height: height(context) * 0.8,
+                  width: width(context)* 1,
+                  height: height(context) * 1,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
                         flex: 2,
                         child: Container(
-                          color: Colors.green,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 38.0),
                             child: Container(
@@ -173,14 +171,12 @@ class _AdminBatchInfoState extends State<AdminBatchInfo> {
                         ),
                       ),
                       //body
-                      Expanded(                                // dashboard
-                        flex: 6,
+                      Expanded(   // dashboard
+                        flex: 4,
                         child: Container(
-                          color: Colors.purple,
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(100, 60, 0, 0),
+                            padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
                             child: Container(
-                              color: Colors.red,
                               child: Column(
                                 children: [
                                   Row(
@@ -188,12 +184,10 @@ class _AdminBatchInfoState extends State<AdminBatchInfo> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          print("object");
-
-                                              Navigator.pushNamed(context, "AddTrainerToBatch");
-
-
-
+                                          final storage = html.window.localStorage;
+                                          String? batchId =  storage['batchId'];
+                                          saveBatchIdInLocalStorage(batchId!);
+                                          Navigator.pushNamed(context, "AddTrainerToBatch");
                                         },
                                         child: buildDashboardCard(
                                           title: 'Trainer Assign',
@@ -201,7 +195,9 @@ class _AdminBatchInfoState extends State<AdminBatchInfo> {
                                         ),
                                       ),
                                       InkWell(
-                                        onTap: () {},
+                                        onTap: () {
+                                          Navigator.pushNamed(context, "AddTraineeToBatch");
+                                        },
                                         child: buildDashboardCard(
                                           title: 'Assign Trainee',
                                           subtitle: 'Assign Trainee in Batch',
@@ -225,7 +221,6 @@ class _AdminBatchInfoState extends State<AdminBatchInfo> {
                                               confirmBtnColor: sweetYellow,
                                               confirmBtnText: "Create",
                                               title: "Create Course",
-                                              //customAsset: FlutterLogo(),
 
                                               widget: Form(
                                                 key: _courseFormKey,
@@ -343,11 +338,8 @@ class _AdminBatchInfoState extends State<AdminBatchInfo> {
                         ),
                       ),
                       Expanded(
-                        flex: 2,
+                        flex: 1,
                         child: Container(
-                          height: height(context)*.80,
-                          color: Colors.lime,
-                          child: Text("ss"),
                         ),
                       ),
                     ],
@@ -361,12 +353,17 @@ class _AdminBatchInfoState extends State<AdminBatchInfo> {
     );
   }
 
+  void saveBatchIdInLocalStorage(String batchId) {
+    final storage = html.window.localStorage;
+    storage['batchId'] = batchId;
+  }
+
   Widget buildDashboardCard({required String title, required String subtitle}) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 50, 40),
+      padding: const EdgeInsets.fromLTRB(0, 0, 10, 8),
       child: SizedBox(
-        width: 280, // Set a fixed width for the card
-        height: 220, // Set a fixed height for the card
+        width: width(context)* 0.18,
+        height: height(context)*0.25, // Set a fixed height for the card
         child: Container(
           decoration: box12,
           child: Column(

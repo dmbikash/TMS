@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:training_management_system/provider/AddTrainerToBatch_provider.dart';
+import 'package:training_management_system/provider/addTraineeToBatch_provider.dart';
+import 'package:training_management_system/provider/addTrainerToBatch_provider.dart';
 import 'package:training_management_system/provider/admin_batch_info_provider.dart';
 import 'package:training_management_system/provider/admin_dashboard_provider.dart';
 import 'package:training_management_system/provider/create_user_provider.dart';
 import 'package:training_management_system/provider/login_provider.dart';
 import 'package:training_management_system/provider/trainee_dashboard_provider.dart';
 import 'package:training_management_system/provider/trainer_dashboard_provider.dart';
+import 'package:training_management_system/screen/batch/add_trainee_to_batch.dart';
 import 'package:training_management_system/screen/batch/add_trainer_to_batch.dart';
-import 'package:training_management_system/screen/course/admin_batch_info.dart';
+import 'package:training_management_system/screen/batch/admin_batch_info.dart';
 import 'package:training_management_system/screen/dashboad/admin_dashboard.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:training_management_system/screen/dashboad/trainee_dashboard.dart';
@@ -29,6 +31,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => TraineeDashboardProvider()),
       ChangeNotifierProvider(create: (_) => AdminBatchInfoProvider()),
       ChangeNotifierProvider(create: (_) => AddTrainerToBatchProvider()),
+      ChangeNotifierProvider(create: (_) => AddTraineeToBatchProvider()),
 
 
     ],
@@ -64,6 +67,7 @@ class MyApp extends StatelessWidget {
 
         'AdminBatchInfo' : (context) => AdminBatchInfo(),
         'AddTrainerToBatch' : (context) => AddTrainerToBatch(),
+        'AddTraineeToBatch' : (context) => AddTraineeToBatch(),
 
 
       },

@@ -259,9 +259,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     ),
                     //body
                     Expanded(
-                      flex: 6,
+                      flex: 4,
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                         child: FutureBuilder<List<dynamic>>(
                           future: adminProvider.getBatch(),
                           builder: (context, snapshot) {
@@ -318,11 +318,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    "Start Date: ${dateFormatter(snapshot.data![j]['startDate'])}",
+                                                    "Start: ${dateFormatter(snapshot.data![j]['startDate'])}",
                                                     style: grey20,
                                                   ),
                                                   Text(
-                                                    "EndDate: ${dateFormatter(snapshot.data![j]['endDate'])}",
+                                                    "End : ${dateFormatter(snapshot.data![j]['endDate'])}",
                                                     style: grey20,
                                                   ),
                                                   Text(
@@ -367,7 +367,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     ),
 
                     Expanded(
-                      flex: 2,
+                      flex: 1,
                       child: Container(
                           // color: Colors.purple,
                           ),
