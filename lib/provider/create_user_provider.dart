@@ -115,6 +115,7 @@ class CreateUserProvider with ChangeNotifier{
       //Navigator.pop(context);
     } else {
       print('Error occurred while posting Trainee data: ${response.statusCode}');
+
     }
   }
 

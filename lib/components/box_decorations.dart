@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:training_management_system/components/color.dart';
 
 BoxDecoration box12 =  BoxDecoration(
+  color: primary.withOpacity(.15),
    //color: Colors.yellow[400]?.withOpacity(.65),
-    gradient:  LinearGradient(
-        colors: [
-          Color(0xFFFFC947).withOpacity(.15),
-          Color(0xFFFFC947).withOpacity(.45),
-          Color(0xFFFFC947).withOpacity(.75),
-
-         // Color(0xFFFFC947)
-        ]
-
-    ),
+   //  gradient:  LinearGradient(
+   //      colors: [
+   //        //primary,
+   //        secondary.withOpacity(.15),
+   //        secondary,
+   //        // Color(0xFFFFC947).withOpacity(.15),
+   //        // Color(0xFFFFC947).withOpacity(.45),
+   //        // Color(0xFFFFC947).withOpacity(.75),
+   //
+   //       // Color(0xFFFFC947)
+   //      ]
+   //
+   //  ),
     border: Border.all(width: 2,color: Colors.black54.withOpacity(.15)),
     borderRadius: BorderRadius.all(Radius.circular(12)),
 );

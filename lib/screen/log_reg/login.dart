@@ -129,18 +129,16 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                     ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-
-
                           _animationController.forward().then((_) async {
+                            //await loginProvider.get_role(_email.text, _password.text);
+                            await loginProvider.get_role(_email.text,_password.text);
 
-                            await loginProvider.get_role(_email.text, _password.text);
-
-                            if (loginProvider.role == "TRAINEE") {
+                            if (loginProvider.role == "TRAINEE" && loginProvider.statusCode== 200) {
                               Navigator.pushNamed(context, "TraineeDashboard");
-                            } else if (loginProvider.role == "ADMIN") {
-                              Navigator.pushNamed(context, "AdminDashboard");
-                            } else if (loginProvider.role == "TRAINER") {
-                              Navigator.pushNamed(context, "TrainerDashboard");
+                            } else if (loginProvider.role == "ADMIN" && loginProvider.statusCode== 200) {
+                              Navigator.pushNamed(context, "AdminHome",);
+                            } else if (loginProvider.role == "TRAINER" && loginProvider.statusCode== 200) {
+                              Navigator.pushNamed(context, "LandingScreenTrainer");
                             } else {
                               print("Invalid role");
                             }

@@ -13,6 +13,9 @@ import '../../components/my_app_bar.dart';
 import '../../components/screen_size.dart';
 import "package:universal_html/html.dart" as html;
 
+import '../batch/batchlist.dart';
+import 'dashboard_components/admin_side_menu.dart';
+
 class AdminDashboard extends StatefulWidget {
   const AdminDashboard({Key? key}) : super(key: key);
 
@@ -84,11 +87,13 @@ class _AdminDashboardState extends State<AdminDashboard> {
               QuickAlert.show(
                 onConfirmBtnTap: (){
                   if(_batchFormKey.currentState!.validate()){
-                      postBatch({
+                      adminProvider.postBatch({
                         'name': _batchName.text,
                         'start_date': _startDateController.text,
                         'end_date': _endDateController.text,
-                      });
+                      },
+                      context
+                      );
                     }
                   },
                   context: context,
@@ -178,193 +183,13 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     //side menu
                     Expanded(
                       flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 38.0),
-                        child: Container(
-                          height: height(context) * .80,
-                          decoration: box12Sidebar,
-                          //color: Colors.orangeAccent,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                            InkWell(
-                              onTap: (){},
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  //decoration: box12Sidebar,
-                                  child: TextLiquidFill(
-                                    text: 'Profile',
-                                    waveColor: sweetYellow,
-                                    boxBackgroundColor: Colors.black,
-                                    textStyle: black20,
-                                    boxHeight: 70,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: (){},
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  //decoration: box12Sidebar,
-                                  child: TextLiquidFill(
-                                    text: 'BATCH',
-                                    waveColor: sweetYellow,
-                                    boxBackgroundColor: Colors.black,
-                                    textStyle: black20,
-                                    boxHeight: 70,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: (){
-                                Navigator.pushNamed(context, "TraineeRegister");
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  child: TextLiquidFill(
-                                    text: 'CREATE ACCOUNT',
-                                    waveColor: sweetYellow,
-                                    boxBackgroundColor: Colors.black,
-                                    textStyle: black20,
-                                    boxHeight: 70,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            InkWell(
-                              onTap: (){},
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  child: TextLiquidFill(
-                                    text: 'Logout',
-                                    waveColor: sweetYellow,
-                                    boxBackgroundColor: Colors.black,
-                                    textStyle: black20,
-                                    boxHeight: 70,
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            ],
-                          ),
-                        ),
-                      ),
+                      child: AdminSideMenu(),
                     ),
                     //body
-                    Expanded(
-                      flex: 4,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                        child: FutureBuilder<List<dynamic>>(
-                          future: adminProvider.getBatch(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              // Create a list of batches with 3 batches in each row
-                              List<Widget> rowsOfCards = [];
-                              int batchSize = 3;
-                              int totalBatches = snapshot.data!.length;
-                              double maxWidth = width(context) * 0.5/3; // Maximum width for each card
-                              for (int i = 0; i < totalBatches; i += batchSize) {
-                                int endIndex = i + batchSize;
-                                if (endIndex > totalBatches) {
-                                  endIndex = totalBatches;
-                                }
-
-                                List<Widget> rowChildren = [];
-                                for (int j = i; j < endIndex; j++) {
-                                  rowChildren.add(
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: InkWell(
-                                        onTap: (){
-                                          String batchId = (snapshot.data![j]['batchId']).toString();
-                                          saveBatchIdInLocalStorage(batchId);
-                                          Navigator.pushNamed(context, 'AdminBatchInfo');
-                                        },
-                                        child: Container(
-                                          constraints: BoxConstraints(maxWidth: maxWidth),
-                                          decoration: box12,
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                '${snapshot.data![j]['batchName']}',
-                                                style: black40,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                              Text(
-                                                "Batch ID: ${snapshot.data![j]['batchId']}",
-                                                style: grey20,
-                                              ),
-                                              SizedBox(height: 10),
-                                              Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.black54,
-                                                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                                                ),
-                                                height: 2,
-                                              ),
-                                              SizedBox(height: 10),
-                                              Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "Start: ${dateFormatter(snapshot.data![j]['startDate'])}",
-                                                    style: grey20,
-                                                  ),
-                                                  Text(
-                                                    "End : ${dateFormatter(snapshot.data![j]['endDate'])}",
-                                                    style: grey20,
-                                                  ),
-                                                  Text(
-                                                    "Total Trainers : ${(snapshot.data![j]['trainers'].length)}      ",
-                                                    style: black20,
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                }
-
-                                rowsOfCards.add(
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    children: rowChildren,
-                                  ),
-                                );
-                              }
-
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  //color: Colors.green,
-                                  child: Column(
-                                    children: rowsOfCards,
-                                  ),
-                                ),
-                              );
-                            } else if (snapshot.hasError) {
-                              return Text("error khaise ekhane --${snapshot.error}");
-                            }
-                            // By default, show a loading spinner
-                            return const CircularProgressIndicator();
-                          },
-                        ),
-                      ),
-                    ),
+                    // Expanded(
+                    //   flex: 4,
+                    //   child: BatchList(),
+                    // ),
 
                     Expanded(
                       flex: 1,
@@ -382,57 +207,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
     });
   }
 
-  Future<void> postBatch(var batchInfo) async {
-    //List categoryDataList, BuildContext context;
-    //print(categoryDataList[0]);
 
-    String? token = getTokenFromLocalStorage();
-    String? url = 'http://localhost:8090/batch/create';
-    //print(url!+token!);
-    final headers = {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
-    };
-    final data = {
-      "batchName": batchInfo['name'],
-      "startDate": batchInfo['start_date'],
-      "endDate": batchInfo['end_date'],
-      "trainers": null,
-
-    };
-    final jsonBody = jsonEncode(data);
-    final response =
-    await http.post(Uri.parse(url), headers: headers, body: jsonBody);
-
-    if (response.statusCode == 200) {
-      print(response.body);
-      // Data posted successfully
-      print('Data posted successfully');
-      Navigator.pop(context);
-    } else {
-      // Error occurred while posting data
-      print('Error occurred while posting data: ${response.body}');
-    }
-  }
-
-  String? getTokenFromLocalStorage() {
-    final storage = html.window.localStorage;
-    return storage['token'];
-  }
-
-  String dateFormatter(String date){
-    return DateFormat('dd MMMM, yyyy').format(DateTime.parse(date));
-
-  }
-
-  void saveBatchIdInLocalStorage(String batchId) {
-    final storage = html.window.localStorage;
-    storage['batchId'] = batchId;
-  }
-
-  String? getBatchIdInLocalStorage() {
-    final storage = html.window.localStorage;
-    return storage['batchId'];
-  }
 
 }
+
+
+
+
