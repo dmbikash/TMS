@@ -27,7 +27,9 @@ class BatchInformationTrainer extends StatelessWidget {
                     .start,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      onMenuItemSelected(TrainerMenuItem.ClassRoom);
+                    },
                     child: buildDashboardCard(
                       title: 'Classroom',
                       subtitle: 'Create post or notice',

@@ -9,6 +9,7 @@ import 'package:training_management_system/provider/alu_provider.dart';
 import 'package:training_management_system/provider/assignment_trainer_provider.dart';
 import 'package:training_management_system/provider/batch_details_provider.dart';
 import 'package:training_management_system/provider/batch_info_trainer_provider.dart';
+import 'package:training_management_system/provider/classroom_provider.dart';
 import 'package:training_management_system/provider/course_info_provider.dart';
 import 'package:training_management_system/provider/course_info_trainer_provider.dart';
 import 'package:training_management_system/provider/create_user_provider.dart';
@@ -55,6 +56,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => BatchInfoTrainerProvider()),
       ChangeNotifierProvider(create: (_) => CourseInfoTrainerProvider()),
       ChangeNotifierProvider(create: (_) => ScheduleProvider()),
+      ChangeNotifierProvider(create: (_) => ClassRoomProvider()),
 
 
     ],

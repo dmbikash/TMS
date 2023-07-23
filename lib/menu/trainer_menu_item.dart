@@ -19,7 +19,8 @@ enum TrainerMenuItem {
   AssignmentTrainer,
   CourseInfoTrainer,
   BatchDetailsPage,
-  ScheduleTrainer
+  ScheduleTrainer,
+  ClassRoom
 
 }
 

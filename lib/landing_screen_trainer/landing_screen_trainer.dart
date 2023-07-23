@@ -10,6 +10,7 @@ import 'package:training_management_system/screen/batch/batchlist.dart';
 import 'package:training_management_system/screen/create_user_tms/create_trainer_form.dart';
 import 'package:training_management_system/trainer_screen/trainer_profile.dart';
 
+import '../classroom/classroomt.dart';
 import '../components/text_style.dart';
 import '../menu/menu_item.dart';
 import '../menu/trainer_menu_item.dart';
@@ -45,6 +46,10 @@ class _LandingScreenTrainerState extends State<LandingScreenTrainer> {
   void onTrainerMenuItemSelected(TrainerMenuItem menuItem) {
 
     switch (menuItem) {
+
+    case TrainerMenuItem.ClassRoom:
+    _middleContentWidgetKey.currentState?.changeContent(ClassRoomPage());
+    break;
 
     case TrainerMenuItem.ScheduleTrainer:
     _middleContentWidgetKey.currentState?.changeContent(ScheduleTrainer());
@@ -155,4 +160,7 @@ class _MiddleContentWidgetState extends State<MiddleContentWidget> {
     );
   }
 }
+
+
+
 
