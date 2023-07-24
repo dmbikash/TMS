@@ -63,127 +63,218 @@ class BatchList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AdminDashboardProvider>(builder: (context, adminProvider, child){
       return Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+        padding: const EdgeInsets.fromLTRB(50, 50, 50, 50),
         child: FutureBuilder<List<dynamic>>(
           future: adminProvider.getBatch(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               // Create a list of batches with 3 batches in each row
-              return ListView.builder(
-                itemCount: snapshot.data!.length+1,
-
-                  itemBuilder: (context,index){
-                    print(snapshot.data!.length);
-                    if(index == snapshot.data!.length){
-                      return TextButton(
-                          onPressed: (){
-                            QuickAlert.show(
-                                onConfirmBtnTap: (){
-                                  if(_batchFormKey.currentState!.validate()){
-                                    var batchData = {
-                                      'name': _batchName.text,
-                                      'start_date': _startDateController.text,
-                                      'end_date': _endDateController.text,
-                                    };
-                                    adminProvider.postBatch(batchData, context);
-                                  }
-                                },
-                                context: context,
-                                type: QuickAlertType.info,
-                                confirmBtnColor: sweetYellow,
-                                confirmBtnText: "Create",
-                                title: "Batch Info",
-                                //customAsset: FlutterLogo(),
-
-                                widget: Form(
-                                  key: _batchFormKey,
-                                  child: Column(
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, // Display 3 cards in each row
+                  crossAxisSpacing: 16, // Spacing between columns
+                  mainAxisSpacing: 16, // Spacing between rows
+                ),
+                itemCount: snapshot.data!.length + 1,
+                itemBuilder: (context, index) {
+                  if (index == snapshot.data!.length) {
+                    // Display a card for creating a new batch
+                    return InkWell(
+                      onTap: () {
+                        QuickAlert.show(
+                          onConfirmBtnTap: () {
+                            if (_batchFormKey.currentState!.validate()) {
+                              var batchData = {
+                                'name': _batchName.text,
+                                'start_date': _startDateController.text,
+                                'end_date': _endDateController.text,
+                              };
+                              adminProvider.postBatch(batchData, context);
+                            }
+                          },
+                          context: context,
+                          type: QuickAlertType.info,
+                          confirmBtnColor: sweetYellow,
+                          confirmBtnText: "Create",
+                          title: "Batch Info",
+                          widget: Form(
+                            key: _batchFormKey,
+                            child: Column(
+                              children: [
+                                TextFormField(
+                                  validator: (val){
+                                    if(val!.isEmpty) return "required field";
+                                  },
+                                  controller: _batchName,
+                                  decoration: InputDecoration(hintText: "Batch Name"),
+                                ),
+                                Container(
+                                  height: 100,
+                                  width: 500,
+                                  //color: Colors.red,
+                                  child: Row(
                                     children: [
-                                      TextFormField(
-                                        validator: (val){
-                                          if(val!.isEmpty) return "value des nai oak thu";
-                                        },
-                                        controller: _batchName,
-                                        decoration: InputDecoration(hintText: "Batch Name"),
-                                      ),
-                                      Container(
-                                        height: 100,
-                                        width: 500,
-                                        //color: Colors.red,
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 1,
-                                              child: TextFormField(
-                                                validator: (val){
-                                                  if(val!.isEmpty) return "value des nai oak thu";
-                                                },
-                                                controller: _startDateController,
-                                                readOnly: true,
-                                                // Make the field read-only to prevent manual input
-                                                onTap: () => _selectStartDate(context),
-                                                decoration: const InputDecoration(
-                                                  labelText: 'Start Date',
-                                                  hintText: 'Select a date',
-                                                  suffixIcon: Icon(Icons.calendar_today),
-                                                  border: OutlineInputBorder(),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              width: 100,
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: TextFormField(
-                                                validator: (val){
-                                                  if(val!.isEmpty) return "value des nai oak thu";
-                                                },
-                                                controller: _endDateController,
-                                                readOnly: true,
-                                                onTap: () => _selectEndDate(context),
-                                                decoration: const InputDecoration(
-                                                  labelText: 'End Date',
-                                                  hintText: 'Select an end date',
-                                                  suffixIcon: Icon(Icons.calendar_today),
-                                                  border: OutlineInputBorder(),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                      Expanded(
+                                        flex: 1,
+                                        child: TextFormField(
+                                          validator: (val){
+                                            if(val!.isEmpty) return "required field";
+                                          },
+                                          controller: _startDateController,
+                                          readOnly: true,
+                                          // Make the field read-only to prevent manual input
+                                          onTap: () => _selectStartDate(context),
+                                          decoration: const InputDecoration(
+                                            labelText: 'Start Date',
+                                            hintText: 'Select a date',
+                                            suffixIcon: Icon(Icons.calendar_today),
+                                            border: OutlineInputBorder(),
+                                          ),
                                         ),
                                       ),
-                                      // TextFormField(),
-                                      //TextFormField(),
+                                      const SizedBox(
+                                        width: 100,
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: TextFormField(
+                                          validator: (val){
+                                            if(val!.isEmpty) return "required field";
+                                          },
+                                          controller: _endDateController,
+                                          readOnly: true,
+                                          onTap: () => _selectEndDate(context),
+                                          decoration: const InputDecoration(
+                                            labelText: 'End Date',
+                                            hintText: 'Select an end date',
+                                            suffixIcon: Icon(Icons.calendar_today),
+                                            border: OutlineInputBorder(),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                ));
-
-                      }, child: Text("data"));
-                    }
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical:8),
-                      child: Container(
-                        height: height(context)*.15,
-                          width: width(context)*.2,
-                          color: primary.withOpacity(.15),
-                          child: InkWell(
-                            onTap: (){
-                              String batchId = (snapshot.data![index]['batchId']).toString();
-                              adminProvider.saveBatchIdInLocalStorage(batchId);
-                              onMenuItemSelected(MenuItem.BatchInformation);
-                            },
-                              child: Text(snapshot.data![index]["batchName"]))),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Card(
+                        elevation: 4, // Add some elevation for a slight shadow effect
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10), // Rounded corners for the card
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Create Batch",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                "You can create a new batch using this information.",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     );
-                  });
+                  }
+                  // Display batch information in a styled card
+                  return Card(
+                    elevation: 4, // Add some elevation for a slight shadow effect
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10), // Rounded corners for the card
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        String batchId = (snapshot.data![index]['batchId']).toString();
+                        adminProvider.saveBatchIdInLocalStorage(batchId);
+                        onMenuItemSelected(MenuItem.BatchInformation);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Batch Name",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              snapshot.data![index]["batchName"],
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              "Start Date",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              snapshot.data![index]["startDate"],
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              "End Date",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              snapshot.data![index]["endDate"],
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
             } else if (snapshot.hasError) {
-              return Text("error khaise ekhane --${snapshot.error}");
+              return Text("Error: ${snapshot.error}");
             }
             // By default, show a loading spinner
             return const CircularProgressIndicator();
           },
         ),
       );
+
+
+
     });
   }
 }

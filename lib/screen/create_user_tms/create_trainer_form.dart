@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../components/color.dart';
 import '../../components/screen_size.dart';
 import '../../provider/create_user_provider.dart';
 
@@ -55,11 +56,17 @@ class CreateTrainerForm extends StatelessWidget {
                         Expanded(
                           flex: 1,
                           child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                            ),
                             onPressed: () {
                               createUserProvider.pickImage(context);
                             },
                             child: createUserProvider.image == null
-                                ? Text("Select Image")
+                                ? Text("Select Image",
+                              style: TextStyle(
+                              color: sweetYellow,
+                            ),)
                                 : Icon(
                               Icons.thumb_up_sharp,
                               color: Colors.green,
@@ -234,7 +241,13 @@ class CreateTrainerForm extends StatelessWidget {
                             createUserProvider.createTrainer(trainerData);
                           }
                         },
-                        child: Text("Register Trainer"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                        ),
+                        child: Text("Register Trainer",
+                          style: TextStyle(
+                            color: sweetYellow,
+                          ),),
                       ),
                     ),
                   ],

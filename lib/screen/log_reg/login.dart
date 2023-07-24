@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:training_management_system/provider/login_provider.dart';
 import 'package:universal_html/html.dart' as html;
 
+import '../../components/color.dart';
+
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -68,9 +70,9 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                       'TMS', // Your app title
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue, // Customize the color as per your design
+                        fontSize: 50,
+                        fontWeight: FontWeight.w900,
+                        color: sweetYellow, // Customize the color as per your design
                       ),
                     ),
                     SizedBox(height: 10),
@@ -119,7 +121,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                         child: Text(
                           'Forgot Password?',
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.blueGrey,
                             fontSize: 14,
                           ),
                         ),
@@ -148,16 +150,17 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Colors.black,
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                         padding: EdgeInsets.symmetric(horizontal: 32, vertical: 14),
                       ),
                       child: Text(
                         "Log In",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: sweetYellow,
                           fontSize: 18,
                         ),
+
                       ),
                     )
                   ],
@@ -170,3 +173,22 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
     );
   }
 }
+
+// InkWell(
+//   onTap: (){
+//     createUserProvider.clickOnSideMenu(1);
+//   },
+//   child: Padding(
+//     padding: const EdgeInsets.all(8.0),
+//     child: Container(
+//       //decoration: box12Sidebar,
+//       child: TextLiquidFill(
+//         text: 'CREATE ADMIN',
+//         waveColor: sweetYellow,
+//         boxBackgroundColor: Colors.black,
+//         textStyle: black20,
+//         boxHeight: 70,
+//       ),
+//     ),
+//   ),
+// ),

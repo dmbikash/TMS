@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:training_management_system/components/screen_size.dart';
 import 'package:training_management_system/provider/assignment_trainer_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -175,7 +176,16 @@ class AssignmentTrainer extends StatelessWidget {
                                     ),
                                   ));
                             },
-                            child: Text("Create"),
+                            child: Text("Create",
+                              style: TextStyle(
+                                color: sweetYellow,
+                              ),
+                            ),
+                            style: ButtonStyle(
+                              fixedSize: MaterialStateProperty.all(Size(50, 50)),
+                              backgroundColor: MaterialStateProperty.all(Colors.black),
+
+                            ),
                           );
                         }
                         var assignment = assignments[index];
@@ -184,7 +194,7 @@ class AssignmentTrainer extends StatelessWidget {
                           // Grayish background color for the card
                           child: InkWell(
                             onTap: () {
-                              // Handle the click event if needed
+
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
@@ -222,8 +232,6 @@ class AssignmentTrainer extends StatelessWidget {
                                       children: [
                                         ElevatedButton(
                                             onPressed: () async {
-                                              //String url = "localhost:8090/assignment/download/1";
-                                              //htmml.window.open(url, "CV_Bikash_Flutter Dev.pdf");
                                               String fileUrl = 'http://localhost:8090/assignment/download/${assignments[index]["assignmentId"]}'; // Replace with your file URL
                                               downloadFile(fileUrl);
 
