@@ -275,6 +275,7 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
                                                                                 };
                                                                                 classRoomProvider.createComment(commentDataMap, context);
                                                                                 commentData.text= "";
+                                                                                Navigator.pop(context);
                                                                               }
                                                                                 },
                                                                             child:
