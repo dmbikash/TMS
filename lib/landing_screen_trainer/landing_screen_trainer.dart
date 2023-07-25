@@ -1,28 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:training_management_system/components/batch_info_cards.dart';
-import 'package:training_management_system/components/color.dart';
-import 'package:training_management_system/jhaka_nakatest/mid.dart';
 import 'package:training_management_system/landing_screen/right_widget.dart';
-import 'package:training_management_system/screen/batch/batchlist.dart';
-import 'package:training_management_system/screen/create_user_tms/create_trainer_form.dart';
+import 'package:training_management_system/trainer_screen/submission_list.dart';
 import 'package:training_management_system/trainer_screen/trainer_profile.dart';
-
 import '../classroom/classroomt.dart';
-import '../components/text_style.dart';
-import '../menu/menu_item.dart';
 import '../menu/trainer_menu_item.dart';
-import '../screen/batch/add_trainee_to_batch.dart';
-import '../screen/batch/add_trainer_to_batch.dart';
 import '../screen/batch/batch_details.dart';
-import '../screen/batch/batch_information.dart';
-import '../screen/batch/course_info_of_batch.dart';
-import '../screen/create_user_tms/create_admin_form.dart';
-import '../screen/create_user_tms/create_trainee_form.dart';
 import '../screen/page1_aluu.dart';
-import '../screen/page2_potol.dart';
 import '../trainer_screen/assignment_trainer.dart';
 import '../trainer_screen/batch_information_trainer.dart';
 import '../trainer_screen/batches_of_trainer.dart';
@@ -46,6 +30,9 @@ class _LandingScreenTrainerState extends State<LandingScreenTrainer> {
   void onTrainerMenuItemSelected(TrainerMenuItem menuItem) {
 
     switch (menuItem) {
+      case TrainerMenuItem.submissionList:
+        _middleContentWidgetKey.currentState?.changeContent(SubmissionList());
+        break;
 
     case TrainerMenuItem.ClassRoom:
     _middleContentWidgetKey.currentState?.changeContent(ClassRoomPage());
@@ -63,7 +50,7 @@ class _LandingScreenTrainerState extends State<LandingScreenTrainer> {
         _middleContentWidgetKey.currentState?.changeContent(CourseInfoTrainer());
         break;
       case TrainerMenuItem.AssignmentTrainer:
-        _middleContentWidgetKey.currentState?.changeContent(AssignmentTrainer());
+        _middleContentWidgetKey.currentState?.changeContent(AssignmentTrainer(onMenuItemSelected: onTrainerMenuItemSelected,));
         break;
 
       case TrainerMenuItem.batchInfo:

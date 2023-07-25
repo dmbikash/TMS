@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:training_management_system/components/screen_size.dart';
-
-import '../components/box_decorations.dart';
 import '../menu/trainer_menu_item.dart';
 import '../provider/batch_info_trainer_provider.dart';
 
 class BatchInformationTrainer extends StatelessWidget {
+
   final void Function(TrainerMenuItem) onMenuItemSelected;
+
    BatchInformationTrainer(
        {Key? key,
     required this.onMenuItemSelected

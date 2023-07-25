@@ -7,77 +7,91 @@ import 'package:http/http.dart' as http;
 import 'package:universal_html/html.dart' as html;
 import 'package:file_picker/file_picker.dart';
 
-
-
-
 class AssignmentTrainerProvider with ChangeNotifier {
-
   var assignmentFileName = "";
-  var assignment ;
+  var assignment;
 
-  String trainerId = 'kfhf-2';
-  String batchId = 'sfsdf-2';
-
-
+  String trainerId = '';
+  String batchId = '';
 
   Future<void> createAssignment(var adminData, BuildContext context) async {
-    print("create assignment");
-    print(adminData);
-    print(assignmentFileName);
-
-
     String? token = getTokenFromLocalStorage();
     String? url = 'http://localhost:8090/assignment/create';
 
     final headers = {
       'Authorization': 'Bearer $token',
     };
-    print(token);
-
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers.addAll(headers);
-    print(assignmentFileName);
-    try{
-      //print(assignment);
-     // print(assignmentFileName);
+
+    try {
       if (assignment != null) {
-        //Uint8List data = await assignment!.readAsBytes();
-       // List<int> list = data.cast();
         final assignmentFile = await http.MultipartFile.fromBytes(
             'assignmentMultipartFile', assignment,
             filename: assignmentFileName);
         request.files.add(assignmentFile);
-      } else {
-        print("image e jhamela");
-      }
-    }catch(e){
-      print("ekhane jhamela $e");
-    }
+      } else {}
+    } catch (e) {}
 
-    trainerId =  getTrainerIdFromLocalStorage()!;
-
-    batchId =  getBatchIdInLocalStorage()!;
-
-   //  print("trainerId--------khalid----------$trainerId");
-   // print('batchId-------------khalid----------------$batchId');
+    trainerId = getTrainerIdFromLocalStorage()!;
+    batchId = getBatchIdInLocalStorage()!;
 
     request.fields['title'] = adminData['title'];
     request.fields['description'] = adminData['description'];
     request.fields['deadline'] = adminData['deadline'];
-    request.fields['trainerId'] = trainerId;        //['trainerId'];
-    request.fields['batchId'] = batchId;         //['batchId'];
+    request.fields['trainerId'] = trainerId; //['trainerId'];
+    request.fields['batchId'] = batchId; //['batchId'];
 
     var response = await request.send();
 
     if (response.statusCode == 200) {
-
       String responseString = await response.stream.bytesToString();
       var jsonResponse = jsonDecode(responseString);
       print('Assignment Created successfully');
       notifyListeners();
       Navigator.pop(context);
-    }else{
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  ///submission----------------
+
+  Future<void> createSubmission(BuildContext context) async {
+    String? token = getTokenFromLocalStorage();
+    String? url = 'http://localhost:8090/assignment/submit';
+
+    final headers = {
+      'Authorization': 'Bearer $token',
+    };
+
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    request.headers.addAll(headers);
+
+    if (assignment != null) {
+      final submissionFile = http.MultipartFile.fromBytes(
+          'submissionMultipartFile', assignment,
+          filename: assignmentFileName);
+      request.files.add(submissionFile);
+    } else {}
+
+    String traineeId = getTraineeIdFromLocalStorage()!;
+    String assignmentId = getAssignmentIdFromLocalStorage()!;
+
+    request.fields['submissionTime'] = DateTime.now().toString();
+    request.fields['assignmentId'] = assignmentId;
+    request.fields['traineeId'] = traineeId;
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      String responseString = await response.stream.bytesToString();
+      var jsonResponse = jsonDecode(responseString);
+      print('Submission Created successfully');
+      notifyListeners();
+      Navigator.pop(context);
+    } else {
       print(response.statusCode);
     }
   }
@@ -85,18 +99,16 @@ class AssignmentTrainerProvider with ChangeNotifier {
   Future<void> pickFile(BuildContext context) async {
     try {
       final result = await FilePicker.platform.pickFiles();
-     assignment =  result!.files.first.bytes;
-
+      assignment = result!.files.first.bytes;
 
       if (assignment == null) {
-        SnackBar(
+        const SnackBar(
           content: Text("NULL FILE"),
         );
-      }else{
-        assignmentFileName =  result.files.first.name;
+      } else {
+        assignmentFileName = result.files.first.name;
       }
     } catch (e) {
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(e.toString()),
@@ -106,18 +118,8 @@ class AssignmentTrainerProvider with ChangeNotifier {
   }
 
   Future<List<dynamic>> getAssignmentsByBatchId() async {
-
     String? token = getTokenFromLocalStorage();
-
-
-    //int tempBatchId =  int.parse(getBatchIdInLocalStorage()!);
-
-    //trainerId =  (getTrainerIdFromLocalStorage()!);
-
-    batchId =  getBatchIdInLocalStorage()!;
-   //print("trainerId------------------$trainerId");
-    //print('batchId-----------------------------$batchId');
-
+    batchId = getBatchIdInLocalStorage()!;
     String url = "http://localhost:8090/assignment/batch/$batchId";
 
     final response = await http.get(
@@ -128,7 +130,6 @@ class AssignmentTrainerProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       return data;
-      print(data);
     }
     return [];
   }
@@ -143,11 +144,24 @@ class AssignmentTrainerProvider with ChangeNotifier {
     return storage['batchId'];
   }
 
-
-
   String? getTrainerIdFromLocalStorage() {
     final storage = html.window.localStorage;
     return storage['trainerId'];
+  }
+
+  String? getTraineeIdFromLocalStorage() {
+    final storage = html.window.localStorage;
+    return storage['traineeId'];
+
+  }
+
+  void saveAssignmentIdInLocalStorage(String assignmentId) {
+    final storage = html.window.localStorage;
+    storage['assignmentId'] = assignmentId;
+  }
+  String? getAssignmentIdFromLocalStorage() {
+    final storage = html.window.localStorage;
+    return storage['assignmentId'];
 
   }
 }

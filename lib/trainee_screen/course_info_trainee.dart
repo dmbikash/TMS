@@ -4,9 +4,14 @@ import 'package:provider/provider.dart';
 import '../components/screen_size.dart';
 import '../provider/course_info_trainer_trainee_provider.dart';
 
+class CourseInfoTrainee extends StatefulWidget {
+  const CourseInfoTrainee({Key? key}) : super(key: key);
 
-class CourseInfoTrainer extends StatelessWidget {
-  const CourseInfoTrainer({Key? key}) : super(key: key);
+  @override
+  _CourseInfoTraineeState createState() => _CourseInfoTraineeState();
+}
+
+class _CourseInfoTraineeState extends State<CourseInfoTrainee> {
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class CourseInfoTrainer extends StatelessWidget {
             height: height(context),
             width: width(context) * .5,
             decoration: BoxDecoration(
-              color: Colors.grey[200], // Set the background color of the table
+              color: Colors.grey[200],
               borderRadius: BorderRadius.circular(12),
             ),
             child: FutureBuilder<List<dynamic>>(
@@ -85,6 +90,6 @@ class CourseInfoTrainer extends StatelessWidget {
 
 
 
-   // ;
+    // ;
   }
 }

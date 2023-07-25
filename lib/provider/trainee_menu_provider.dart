@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:universal_html/html.dart' as html;
+import 'package:flutter/cupertino.dart';
 
-class TrainerMenuProvider with ChangeNotifier{
+class TraineeMenuProvider with ChangeNotifier{
   bool profile = true;
   bool batch = false;
   bool logout = false;
@@ -10,14 +10,12 @@ class TrainerMenuProvider with ChangeNotifier{
     profile = false;
     batch = false;
     logout = false;
-    if(c==1) profile = true;
-    if(c==2) batch = true;
-    if(c==3) logout = true;
+    if(c == 1) profile = true;
+    if(c == 2) batch = true;
+    if(c == 3) logout = true;
     notifyListeners();
 
   }
-
-
 
   void saveTokenToLocalStorage(String token) {
     final storage = html.window.localStorage;

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 class BatchesOfTrainerProvider with ChangeNotifier{
 
   int trainerId = -1;
+
   Future<void> getTrainerIdByUserId() async {
 
     String? token = getTokenFromLocalStorage();
@@ -82,15 +83,18 @@ class BatchesOfTrainerProvider with ChangeNotifier{
     final storage = html.window.localStorage;
     storage['token'] = token;
   }
+
   String? getTokenFromLocalStorage() {
     final storage = html.window.localStorage;
     return storage['token'];
   }
+
   String? getUserIdFromLocalStorage() {
     final storage = html.window.localStorage;
     return storage['userId'];
 
   }
+
   void saveBatchIdInLocalStorage(String batchId) {
     final storage = html.window.localStorage;
     storage['batchId'] = batchId;
@@ -100,13 +104,12 @@ class BatchesOfTrainerProvider with ChangeNotifier{
     final storage = html.window.localStorage;
     storage['trainerId'] = trainerId;
   }
+
   String? getTrainerIdFromLocalStorage() {
     final storage = html.window.localStorage;
     return storage['trainerId'];
 
   }
-
-
 
 
 }

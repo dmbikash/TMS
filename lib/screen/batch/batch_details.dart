@@ -97,7 +97,9 @@ class BatchDetailsPage extends StatelessWidget {
                                       fontSize: 24,
                                     ),
                                   ),
+
                                   SizedBox(height: 20),
+
                                   FutureBuilder<dynamic>(
                                     future: batchDetailsProvider.getBatchByBatchId(),
                                     builder: (context, snapshot) {
@@ -127,6 +129,7 @@ class BatchDetailsPage extends StatelessWidget {
                                               style: TextStyle(fontSize: 16),
                                             ),
                                             SizedBox(height: 30),
+
                                             batchDetailsProvider.getRoleFromLocalStorage() == "ADMIN"
                                                 ? ElevatedButton(
                                               onPressed: () {

@@ -136,7 +136,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                             await loginProvider.get_role(_email.text,_password.text);
 
                             if (loginProvider.role == "TRAINEE" && loginProvider.statusCode== 200) {
-                              Navigator.pushNamed(context, "TraineeDashboard");
+                              Navigator.pushNamed(context, "LandingScreenTrainee");
                             } else if (loginProvider.role == "ADMIN" && loginProvider.statusCode== 200) {
                               Navigator.pushNamed(context, "AdminHome",);
                             } else if (loginProvider.role == "TRAINER" && loginProvider.statusCode== 200) {

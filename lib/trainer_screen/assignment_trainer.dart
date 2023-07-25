@@ -10,9 +10,13 @@ import 'package:training_management_system/provider/assignment_trainer_provider.
 import 'package:url_launcher/url_launcher.dart';
 
 import '../components/color.dart';
+import '../menu/trainer_menu_item.dart';
 
 class AssignmentTrainer extends StatelessWidget {
-  AssignmentTrainer({Key? key}) : super(key: key);
+  final void Function(TrainerMenuItem) onMenuItemSelected;
+  AssignmentTrainer({Key? key,
+    required this.onMenuItemSelected
+  }) : super(key: key);
 
   final _createAssignmentFormKey = GlobalKey<FormState>();
   final _description = TextEditingController();
@@ -42,15 +46,16 @@ class AssignmentTrainer extends StatelessWidget {
 
             padding: const EdgeInsets.all(8.0),
             child: Container(
+
               child: FutureBuilder<List<dynamic>>(
                 future: assignmentTrainerProvider.getAssignmentsByBatchId(),
+
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
                       child: CircularProgressIndicator(),
                     );
                   } else if (snapshot.hasError || !snapshot.hasData) {
-                    print(snapshot.data);
                     return Center(
                       child: Text("No assignments found."),
                     );
@@ -59,18 +64,16 @@ class AssignmentTrainer extends StatelessWidget {
                     return ListView.builder(
                       itemCount: (assignments.length) + 1,
                       itemBuilder: (context, index) {
-                        print(index);
+
                         if (assignments.length == index) {
+
                           return ElevatedButton(
                             onPressed: () {
                               QuickAlert.show(
                                   onConfirmBtnTap: () {
-                                    if (_createAssignmentFormKey.currentState!
-                                        .validate()) {
-                                      print(_title.text);
+                                    if (_createAssignmentFormKey.currentState!.validate()) {
 
-                                      assignmentTrainerProvider
-                                          .createAssignment({
+                                      assignmentTrainerProvider.createAssignment({
                                         'title': _title.text,
                                         'description': _description.text,
                                         'deadline': _deadline.text,
@@ -155,11 +158,9 @@ class AssignmentTrainer extends StatelessWidget {
                                                 flex: 1,
                                                 child: ElevatedButton(
                                                   onPressed: () {
-                                                    assignmentTrainerProvider
-                                                        .pickFile(context);
+                                                    assignmentTrainerProvider.pickFile(context);
                                                   },
-                                                  child: assignmentTrainerProvider
-                                                      .assignment == null
+                                                  child: assignmentTrainerProvider.assignment == null
                                                       ? Text("Select File")
                                                       : Icon(
                                                     Icons.check_box_rounded,
@@ -232,14 +233,19 @@ class AssignmentTrainer extends StatelessWidget {
                                       children: [
                                         ElevatedButton(
                                             onPressed: () async {
-                                              String fileUrl = 'http://localhost:8090/assignment/download/${assignments[index]["assignmentId"]}'; // Replace with your file URL
+                                              String fileUrl = 'http://localhost:8090/assignment/download/${assignments[index]["assignmentId"]}';
                                               downloadFile(fileUrl);
 
                                             },
                                             child: Icon(Icons.download)),
+
                                         ElevatedButton(
-                                            onPressed: () {},
-                                            child: Icon(Icons.info)),
+                                            onPressed: () {
+
+                                              onMenuItemSelected(TrainerMenuItem.submissionList);
+                                            },
+                                            child: Icon(Icons.info)
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -260,12 +266,10 @@ class AssignmentTrainer extends StatelessWidget {
   }
 
   void downloadFile(String fileUrl) {
-    // Create a new anchor element
     AnchorElement anchor = AnchorElement(href: fileUrl)
-      ..target = '_blank' // Open the link in a new tab/window
-      ..download = ''; // Set the 'download' attribute to force download
-
-    // Programmatically click the anchor element
+      ..target = '_blank'
+      ..download = '';
     anchor.click();
   }
+
 }
