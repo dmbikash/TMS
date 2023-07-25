@@ -62,7 +62,7 @@ class CourseInfoPage extends StatelessWidget {
               height: height(context),
               width: width(context) * .5,
               decoration: BoxDecoration(
-                color: Colors.grey[200], // Set the background color of the table
+                color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(12),
               ),
               child: FutureBuilder<List<dynamic>>(

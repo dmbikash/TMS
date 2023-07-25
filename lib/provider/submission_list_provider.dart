@@ -10,7 +10,10 @@ class SubmissionListProvider with ChangeNotifier {
   Future<List<dynamic>> getSubmissionsByAssignmentId() async {
 
     String? token = getTokenFromLocalStorage();
-    String url = "http://localhost:8090/assignment/submission-list/1";
+
+    String assignmentId = getAssignmentIdFromLocalStorage().toString();
+
+    String url = "http://localhost:8090/assignment/submission-list/$assignmentId";
 
     final response = await http.get(
       Uri.parse(url),
@@ -27,6 +30,16 @@ class SubmissionListProvider with ChangeNotifier {
   String? getTokenFromLocalStorage() {
     final storage = html.window.localStorage;
     return storage['token'];
+  }
+
+  void saveAssignmentIdInLocalStorage(String assignmentId) {
+    final storage = html.window.localStorage;
+    storage['assignmentId'] = assignmentId;
+  }
+
+  String? getAssignmentIdFromLocalStorage() {
+    final storage = html.window.localStorage;
+    return storage['assignmentId'];
   }
 
 }

@@ -35,7 +35,6 @@ class CreateUserProvider with ChangeNotifier{
   var image = null;
 
   Future<void> createAdmin(var adminData) async {
-    print(adminData);
 
     String? token = getTokenFromLocalstorage();
     String? url = 'http://localhost:8090/auth/register';

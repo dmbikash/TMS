@@ -28,11 +28,9 @@ class BatchDetailsProvider with ChangeNotifier {
 
 
   Future<List<dynamic>> getTrainerListByBatchId() async {
-    print("batch details er trainer data----");
 
     String? token = getTokenFromLocalStorage();
     int tempBatchId =  int.parse(getBatchIdInLocalStorage()!);
-    print(tempBatchId);
     String url = "http://localhost:8090/batch/trainers/$tempBatchId";
 
     final response = await http.get(
@@ -42,7 +40,6 @@ class BatchDetailsProvider with ChangeNotifier {
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
-      print("batch details er trainer data----$data");
       return data;
     }
     return [];

@@ -1,14 +1,8 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:universal_html/html.dart' as html;
-import 'package:training_management_system/components/box_decorations.dart';
-import 'package:training_management_system/components/color.dart';
 import 'package:training_management_system/components/screen_size.dart';
 import 'package:training_management_system/provider/addTrainerToBatch_provider.dart';
-
-import '../../components/my_app_bar.dart';
-import '../../components/text_style.dart';
 
 class AddTrainerToBatch extends StatelessWidget {
   const AddTrainerToBatch({

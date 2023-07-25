@@ -1,13 +1,12 @@
-import 'dart:html' as htmml;
+import 'dart:html' as html;
 import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:training_management_system/components/screen_size.dart';
 import 'package:training_management_system/provider/assignment_trainer_provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:universal_html/html.dart' as html;
 
 import '../components/color.dart';
 import '../menu/trainer_menu_item.dart';
@@ -241,7 +240,7 @@ class AssignmentTrainer extends StatelessWidget {
 
                                         ElevatedButton(
                                             onPressed: () {
-
+                                              saveAssignmentIdInLocalStorage(assignment["assignmentId"].toString());
                                               onMenuItemSelected(TrainerMenuItem.submissionList);
                                             },
                                             child: Icon(Icons.info)
@@ -270,6 +269,11 @@ class AssignmentTrainer extends StatelessWidget {
       ..target = '_blank'
       ..download = '';
     anchor.click();
+  }
+
+  void saveAssignmentIdInLocalStorage(String assignmentId) {
+    final storage = html.window.localStorage;
+    storage['assignmentId'] = assignmentId;
   }
 
 }
