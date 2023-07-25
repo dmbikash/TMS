@@ -20,7 +20,7 @@ import '../screen/page1_aluu.dart';
 import '../screen/page2_potol.dart';
 
 
-// Enum to represent the menu items
+
 
 class LandingScreen extends StatefulWidget {
   @override
@@ -32,7 +32,7 @@ class _LandingScreenState extends State<LandingScreen> {
   final _middleContentWidgetKey = GlobalKey<_MiddleContentWidgetState>();
 
 
-  // Function to handle menu item selection
+
   void onMenuItemSelected(MenuItem menuItem) {
 
     switch (menuItem) {
@@ -40,13 +40,15 @@ class _LandingScreenState extends State<LandingScreen> {
       case MenuItem.CourseInfoPage:
         _middleContentWidgetKey.currentState?.changeContent(CourseInfoPage());
         break;
+
       case MenuItem.BatchDetailsPage:
         _middleContentWidgetKey.currentState?.changeContent(BatchDetailsPage());
         break;
 
-    case MenuItem.AddTrainerToBatch:
-    _middleContentWidgetKey.currentState?.changeContent(AddTrainerToBatch());
-    break;
+      case MenuItem.AddTrainerToBatch:
+      _middleContentWidgetKey.currentState?.changeContent(AddTrainerToBatch());
+      break;
+
       case MenuItem.AddTraineeToBatch:
         _middleContentWidgetKey.currentState?.changeContent(AddTraineeToBatch());
         break;
@@ -55,18 +57,19 @@ class _LandingScreenState extends State<LandingScreen> {
         CardsOfBatchInfo cardsOfBatchInfo = CardsOfBatchInfo();
         _middleContentWidgetKey.currentState?.changeContent(BatchInformation(onMenuItemSelected: onMenuItemSelected, cardsOfBatchInfo: cardsOfBatchInfo,));
         break;
+
       case MenuItem.BatchList:
-       // setState(() {
-       //   flag=true;
-       // });
         _middleContentWidgetKey.currentState?.changeContent(BatchList(onMenuItemSelected: onMenuItemSelected,));
         break;
+
       case MenuItem.Batchdekhabo:
         _middleContentWidgetKey.currentState?.changeContent(Batchdekhabo(onMenuItemSelected: onMenuItemSelected));
         break;
+
       case MenuItem.aluu:
         _middleContentWidgetKey.currentState?.changeContent(ALUUContent());
         break;
+
       case MenuItem.createAdmin:
         _middleContentWidgetKey.currentState?.changeContent(CreateAdminForm());
         break;

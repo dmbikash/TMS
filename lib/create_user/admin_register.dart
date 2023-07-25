@@ -36,7 +36,7 @@ class _AdminRegisterState extends State<AdminRegister> {
                 onPressed: ()  {
                   createAdmin("batchInfo");
                 },
-                child: Text("uplload",style: black40,)),
+                child: Text("upload",style: black40,)),
           ],
         ),
       ),

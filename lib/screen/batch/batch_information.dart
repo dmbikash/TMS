@@ -6,9 +6,9 @@ import 'package:quickalert/widgets/quickalert_dialog.dart';
 import '../../components/batch_info_cards.dart';
 import '../../components/color.dart';
 import '../../menu/menu_item.dart';
-import '../../provider/admin_batch_info_provider.dart';
+import '../../provider/admin_batch_info_provider.dart';import 'course_info_of_batch.dart';
 import 'course_info_of_batch.dart';
-import 'course_info_of_batch.dart';
+
 
 
 class BatchInformation extends StatelessWidget {
@@ -70,7 +70,7 @@ class BatchInformation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AdminBatchInfoProvider>(builder: (context,adminBatchInfoProvider,child){
       return Padding(
-        padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+        padding: const EdgeInsets.fromLTRB(50, 50, 50, 50),
         child: Container(
           child: Column(
             children: [
@@ -212,7 +212,7 @@ class BatchInformation extends StatelessWidget {
                     },
                     child: cardsOfBatchInfo.cards(
                       context,'Batch Details',
-                      'Check and Edit Batch DISCO',
+                      'Check and Edit Batch',
                     ),
                   ),
                   InkWell(
@@ -227,8 +227,8 @@ class BatchInformation extends StatelessWidget {
                       onMenuItemSelected(MenuItem.CourseInfoPage);
                     },
                     child: cardsOfBatchInfo.cards(
-                      context ,'Course Information',
-                      'View and Update All courses',
+                      context ,'Courses',
+                      'View and Update courses',
                     ),
                   ),
                 ],
