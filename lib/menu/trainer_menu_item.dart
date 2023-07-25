@@ -21,7 +21,8 @@ enum TrainerMenuItem {
   BatchDetailsPage,
   ScheduleTrainer,
   submissionList,
-  ClassRoom
+  ClassRoom,
+  Notice,
 
 }
 

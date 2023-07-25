@@ -5,6 +5,7 @@ import 'package:training_management_system/trainer_screen/submission_list.dart';
 import 'package:training_management_system/trainer_screen/trainer_profile.dart';
 import '../classroom/classroomt.dart';
 import '../menu/trainer_menu_item.dart';
+import '../notice/notice.dart';
 import '../screen/batch/batch_details.dart';
 import '../screen/page1_aluu.dart';
 import '../trainer_screen/assignment_trainer.dart';
@@ -30,6 +31,10 @@ class _LandingScreenTrainerState extends State<LandingScreenTrainer> {
   void onTrainerMenuItemSelected(TrainerMenuItem menuItem) {
 
     switch (menuItem) {
+      case TrainerMenuItem.Notice:
+        _middleContentWidgetKey.currentState?.changeContent(Notice());
+        break;
+
       case TrainerMenuItem.submissionList:
         _middleContentWidgetKey.currentState?.changeContent(SubmissionList());
         break;

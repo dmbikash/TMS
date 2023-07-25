@@ -37,10 +37,10 @@ class BatchInformationTrainer extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {onMenuItemSelected(TrainerMenuItem.Notice);},
                     child: buildDashboardCard(
-                      title: 'Group Chat',
-                      subtitle: 'Join the Group Chat',
+                      title: 'Notice',
+                      subtitle: 'See Important Notice ',
                       context: context,
                     ),
                   ),

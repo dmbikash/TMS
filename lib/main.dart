@@ -17,6 +17,7 @@ import 'package:training_management_system/provider/course_info_trainer_trainee_
 import 'package:training_management_system/provider/create_user_provider.dart';
 import 'package:training_management_system/provider/login_provider.dart';
 import 'package:training_management_system/provider/menu_provider.dart';
+import 'package:training_management_system/provider/notice%20provider.dart';
 import 'package:training_management_system/provider/schedule_provider.dart';
 import 'package:training_management_system/provider/submission_list_provider.dart';
 import 'package:training_management_system/provider/trainee_dashboard_provider.dart';
@@ -65,6 +66,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => SubmissionListProvider()),
       ChangeNotifierProvider(create: (_) => TraineeMenuProvider()),
       ChangeNotifierProvider(create: (_) => BatchInfoTraineeProvider()),
+      ChangeNotifierProvider(create: (_) => NoticeProvider()),
 
 
 

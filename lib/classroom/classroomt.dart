@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:training_management_system/components/box_decorations.dart';
 import 'package:training_management_system/components/screen_size.dart';
 import 'package:training_management_system/provider/classroom_provider.dart';
 
@@ -39,7 +40,7 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            color: Colors.green,
+           // color: Colors.green,
             height: height(context),
             child: SingleChildScrollView(
               child: Column(
@@ -137,7 +138,7 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
                   ),
                   Container(
                     height: height(context) * .9,
-                    color: Colors.lime,
+                    //color: Colors.lime,
                     child: FutureBuilder<List<dynamic>>(
                       future: classRoomProvider.getAllPosts(),
                       builder: (context, snapshot) {
@@ -149,9 +150,10 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
+                                  decoration: boxNoBorder,
                                   width: width(context) * .4,
                                   height: height(context) * .45,
-                                  color: Colors.teal[800],
+                                  //color: Colors.teal[800],
                                   child: Row(
                                     children: [
                                       /////////////////////// bam diker kolam
@@ -159,8 +161,21 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
                                         flex: 1,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
+                                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [ Padding(
+                                            padding:
+                                            const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              allPosts[index]["trainerName"],
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 30,
+                                              ),
+                                            ),
+                                          ),
+
+
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
@@ -169,11 +184,14 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
                                                 textAlign: TextAlign.start,
                                               ),
                                             ),
+                                            SizedBox(
+                                              height: height(context)*.25,
+                                            ),
                                             if(allPosts[index]["filePath"] != null )Padding(
                                               padding: const EdgeInsets.all(8.0),
                                               child: Row(
                                                 children: [
-                                                  Text("Attatchments"),
+                                                  Text("Attatchments",style: TextStyle(fontWeight: FontWeight.w600),),
                                                   SizedBox(width: 10,),
                                                   IconButton(
                                                     onPressed: (){
@@ -190,6 +208,7 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
                                       Expanded(
                                         flex: 1,
                                         child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
                                             InkWell(
                                               onTap: () {
@@ -296,67 +315,77 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
                                                       ));
                                                     });
                                               },
-                                              child: Container(
-                                                ////////////////////////          commewnts here
-                                                height: height(context) * .35,
-                                                width: width(context),
-                                                color: Colors.deepPurple,
-                                                child: ListView.builder(
-                                                    itemCount: allPosts[index]
-                                                            ["comments"]
-                                                        .length,
-                                                    itemBuilder: (context,
-                                                        commentIndex) {
-                                                      var comment =
-                                                          allPosts[index]
-                                                                  ["comments"]
-                                                              [commentIndex];
-                                                      return Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Row(
-                                                              children: [
-                                                                Icon(Icons
-                                                                    .supervised_user_circle),
-                                                                Text(comment[
-                                                                    "name"]),
-                                                              ],
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Container(
+                                                  ////////////////////////          commewnts here
+                                                  height: height(context) * .30,
+                                                  width: width(context),
+                                                  //color: Colors.deepPurple,
+                                                  decoration: boxNoBorder2,
+                                                  child: ListView.builder(
+                                                      itemCount: allPosts[index]
+                                                              ["comments"]
+                                                          .length,
+                                                      itemBuilder: (context,
+                                                          commentIndex) {
+                                                        var comment =
+                                                            allPosts[index]
+                                                                    ["comments"]
+                                                                [commentIndex];
+                                                        return Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Row(
+                                                                children: [
+                                                                  Icon(Icons
+                                                                      .supervised_user_circle),
+                                                                  Text(comment["name"] ,
+                                                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Text(comment[
-                                                                "commentData"]),
-                                                          ),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Divider(),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    }),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Text(comment[
+                                                                  "commentData"],
+                                                              style: TextStyle(color: Colors.black54),),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(8.0),
+                                                              child: Divider(),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      }),
+                                                ),
                                               ),
                                             ),
                                             Container(
                                               ////////////////////////          commewnt's intuput here
                                               height: height(context) * .09,
-                                              color: Colors.white60,
+                                             // color: Colors.white60,
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: TextFormField(
                                                   controller: commentData,
                                                   decoration: InputDecoration(
+
+                                                    fillColor: Colors.deepPurple,
+                                                      hoverColor: Colors.green,
+                                                      focusColor: Colors.blueAccent,
                                                       suffix: TextButton(
                                                         onPressed: () {
                                                           if(commentData.text != ""){
