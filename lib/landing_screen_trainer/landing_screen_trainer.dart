@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:training_management_system/landing_screen/right_widget.dart';
 import 'package:training_management_system/trainer_screen/submission_list.dart';
 import 'package:training_management_system/trainer_screen/trainer_profile.dart';
-import '../classroom/classroomt.dart';
+import '../classroom/classroom.dart';
 import '../menu/trainer_menu_item.dart';
 import '../notice/notice.dart';
 import '../screen/batch/batch_details.dart';
@@ -39,8 +39,8 @@ class _LandingScreenTrainerState extends State<LandingScreenTrainer> {
         _middleContentWidgetKey.currentState?.changeContent(SubmissionList());
         break;
 
-    case TrainerMenuItem.ClassRoom:
-    _middleContentWidgetKey.currentState?.changeContent(ClassRoomPage());
+    case TrainerMenuItem.classroom:
+    _middleContentWidgetKey.currentState?.changeContent(ClassroomPage());
     break;
 
     case TrainerMenuItem.ScheduleTrainer:

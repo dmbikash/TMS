@@ -29,13 +29,14 @@ class _BatchesOfTrainerState extends State<BatchesOfTrainer> {
               future: batchesOfTrainerProvider.getBatchListByTrainerId(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  // Create a list of batches with 3 batches in each row
+
                   return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3, // Display 3 cards in each row
-                      crossAxisSpacing: 16, // Spacing between columns
-                      mainAxisSpacing: 16, // Spacing between rows
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
                     ),
+
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       var batchData = snapshot.data![index];
@@ -45,17 +46,18 @@ class _BatchesOfTrainerState extends State<BatchesOfTrainer> {
                       var endDate = batchData["endDate"];
 
                       return Card(
-                        elevation: 4, // Add some elevation for a slight shadow effect
+                        elevation: 4,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10), // Rounded corners for the card
+                          borderRadius: BorderRadius.circular(10),
                         ),
+
                         child: InkWell(
                           onTap: () {
                             String batchId = (snapshot.data![index]['batchId']).toString();
                             batchesOfTrainerProvider.saveBatchIdInLocalStorage(batchId);
-                            print("trainer er batch list theke batchid print hochhe  $batchId");
                             widget.onMenuItemSelected(TrainerMenuItem.batchInfo);
                           },
+
                           child: Container(
                             padding: EdgeInsets.all(16),
                             child: Column(
@@ -102,7 +104,7 @@ class _BatchesOfTrainerState extends State<BatchesOfTrainer> {
                 } else if (snapshot.hasError) {
                   return Text("Error: ${snapshot.error}");
                 }
-                // By default, show a loading spinner
+
                 return const CircularProgressIndicator();
               },
             ),

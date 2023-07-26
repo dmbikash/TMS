@@ -38,4 +38,16 @@ class TraineeMenuProvider with ChangeNotifier{
     final storage = html.window.localStorage;
     return storage['role'];
   }
+
+  void saveBatchIdInLocalStorage(String batchId) {
+    final storage = html.window.localStorage;
+    storage['batchId'] = batchId;
+  }
+
+  void saveTraineeIdInLocalStorage(String traineeId) {
+    final storage = html.window.localStorage;
+    storage['traineeId'] = traineeId;
+  }
+
+
 }

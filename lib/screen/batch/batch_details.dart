@@ -150,7 +150,7 @@ class BatchDetailsPage extends StatelessWidget {
                                                   confirmBtnColor: sweetYellow,
                                                   confirmBtnText: "Update",
                                                   title: "Update Batch Info",
-                                                  //customAsset: FlutterLogo(),
+
 
                                                   widget: Form(
                                                     key: _updateBatchFormKey,

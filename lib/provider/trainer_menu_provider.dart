@@ -36,6 +36,16 @@ class TrainerMenuProvider with ChangeNotifier{
     notifyListeners();
   }
 
+  void saveBatchIdInLocalStorage(String batchId) {
+    final storage = html.window.localStorage;
+    storage['batchId'] = batchId;
+  }
+
+  void saveTrainerIdInLocalStorage(String trainerId) {
+    final storage = html.window.localStorage;
+    storage['trainerId'] = trainerId;
+  }
+
   String? getRoleFromLocalStorage() {
     final storage = html.window.localStorage;
     return storage['role'];

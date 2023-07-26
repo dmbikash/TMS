@@ -32,7 +32,7 @@ class _BatchInformationTraineeState extends State<BatchInformationTrainee> {
                   children: [
                     InkWell(
                       onTap: () {
-                        //onMenuItemSelected(TrainerMenuItem.ClassRoom);
+                        widget.onMenuItemSelected(TraineeMenuItem.classroom);
                       },
                       child: buildDashboardCard(
                         title: 'Classroom',
@@ -41,10 +41,13 @@ class _BatchInformationTraineeState extends State<BatchInformationTrainee> {
                       ),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        widget.onMenuItemSelected(TraineeMenuItem.notice);
+
+                      },
                       child: buildDashboardCard(
-                        title: 'Group Chat',
-                        subtitle: 'Join the Group Chat',
+                        title: 'Notice',
+                        subtitle: 'View notices here',
                         context: context,
                       ),
                     ),

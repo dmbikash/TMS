@@ -55,12 +55,7 @@ class BatchesOfTrainerProvider with ChangeNotifier{
     } else {
       print('The token is not available. Handle the user being logged out or not logged in');
     }
-    print("ami call hochhi");
-    //final SharedPreferences prefs = await SharedPreferences.getInstance();
-    // final String? token = await prefs.getString('token');
-    //print("ami call hochhi na $token2");
 
-    //token2 = token!;
 
      String url = "http://localhost:8090/trainer/batch-list/$trainerId";
     final response = await http.get(

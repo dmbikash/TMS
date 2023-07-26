@@ -12,23 +12,14 @@ class ClassRoomProvider with ChangeNotifier {
  /// --------------------------------------------------get   post in class room
  Future<List<dynamic>> getAllPosts() async {
 
-  String? batchId = await getBatchIdFromLocalStorage();
-  print("batchId-----------------------$batchId");
-
+  String? batchId = getBatchIdFromLocalStorage();
   String? token = getTokenFromLocalStorage();
-  //print(token);
+
   if (token != null) {
-   print('token ase- $token');
-   // Use the token for your API calls
+
   } else {
    print('The token is not available. Handle the user being logged out or not logged in');
   }
-  print("ami call hochhi");
-  //final SharedPreferences prefs = await SharedPreferences.getInstance();
-  // final String? token = await prefs.getString('token');
-  //print("ami call hochhi na $token2");
-
-  //token2 = token!;
 
   String url = "http://localhost:8090/classroom/post-list/$batchId";
   final response = await http.get(
@@ -36,11 +27,9 @@ class ClassRoomProvider with ChangeNotifier {
    headers: {"Authorization": "Bearer $token"},
   );
 
-  print("response.statusCode----ALL POST PAISI MAMA ${response.statusCode}");
-  print(response.body);
   if (response.statusCode == 200) {
    var data = jsonDecode(response.body);
-   print(data);
+
    int c = data.length-1;
    var temp = [];
    for(int i= c; i>=0; i--){
@@ -53,10 +42,6 @@ class ClassRoomProvider with ChangeNotifier {
  }
 
   Future<List<dynamic>> classRoomPost() async{
-
-
-
-
 
 
    var a =   [
@@ -147,12 +132,8 @@ class ClassRoomProvider with ChangeNotifier {
 
 
  Future<void> createPost(var postData, BuildContext context) async {
- // print("create assignment");
- // print(postData);
-//  print(assignmentFileName);
 
   String? batchId = getBatchIdFromLocalStorage();
-
 
   String? token = getTokenFromLocalStorage();
   String? url = 'http://localhost:8090/classroom/post';
@@ -160,35 +141,30 @@ class ClassRoomProvider with ChangeNotifier {
   final headers = {
    'Authorization': 'Bearer $token',
   };
-  print(token);
+
 
 
   var request = http.MultipartRequest('POST', Uri.parse(url));
   request.headers.addAll(headers);
-  print(assignmentFileName);
+
   try{
-   //print(assignment);
-   // print(assignmentFileName);
+
    if (assignment != null) {
-    //Uint8List data = await assignment!.readAsBytes();
-    // List<int> list = data.cast();
+
     final assignmentFile = await http.MultipartFile.fromBytes(
         'postFile', assignment,
         filename: assignmentFileName);
     request.files.add(assignmentFile);
    } else {
-    print("image e jhamela");
+
    }
   }catch(e){
-   print("ekhane jhamela $e");
+
   }
 
   String? trainerId =  getTrainerIdFromLocalStorage()!;
 
   batchId =  getBatchIdInLocalStorage()!;
-
-  //  print("trainerId--------khalid----------$trainerId");
-  // print('batchId-------------khalid----------------$batchId');
 
   request.fields['textData'] = postData['textData'];
   request.fields['postDate'] = postData['postDate'];
@@ -309,7 +285,11 @@ class ClassRoomProvider with ChangeNotifier {
   return storage['userId'];
  }
 
+ String? getRoleFromLocalStorage() {
+  final storage = html.window.localStorage;
+  return storage['role'];
 
+ }
 
 
 }

@@ -21,7 +21,7 @@ enum TrainerMenuItem {
   BatchDetailsPage,
   ScheduleTrainer,
   submissionList,
-  ClassRoom,
+  classroom,
   Notice,
 
 }
@@ -42,8 +42,6 @@ class TrainerMenuWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 38.0),
           child: Container(
             height: height(context) ,
-            //decoration: box12Sidebar,
-            //color: Colors.orangeAccent,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -106,6 +104,8 @@ class TrainerMenuWidget extends StatelessWidget {
                       trainerMenuProvider.onClickSideMenu(1);
                       trainerMenuProvider.saveRoleToLocalStorage("");
                       trainerMenuProvider.saveTokenToLocalStorage("");
+                      trainerMenuProvider.saveBatchIdInLocalStorage("");
+                      trainerMenuProvider.saveTrainerIdInLocalStorage("");
                       Navigator.pushReplacementNamed(context, "/");
                     },
                     child: Padding(

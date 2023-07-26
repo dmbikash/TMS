@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:training_management_system/classroom/classroom.dart';
+import 'package:training_management_system/notice/notice.dart';
 import 'package:training_management_system/provider/assignment_trainer_provider.dart';
 import 'package:training_management_system/screen/batch/batch_details.dart';
 import 'package:training_management_system/screen/page1_aluu.dart';
@@ -27,6 +29,14 @@ class _LandingScreenTraineeState extends State<LandingScreenTrainee> {
   void onTraineeMenuItemSelected(TraineeMenuItem menuItem) {
 
     switch (menuItem) {
+
+      case TraineeMenuItem.classroom:
+        _middleContentWidgetKey.currentState?.changeContent(ClassroomPage());
+        break;
+
+      case TraineeMenuItem.notice:
+        _middleContentWidgetKey.currentState?.changeContent(Notice());
+        break;
 
       case TraineeMenuItem.assignmentTrainee:
         _middleContentWidgetKey.currentState?.changeContent(AssignmentTrainee());

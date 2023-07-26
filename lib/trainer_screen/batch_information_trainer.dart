@@ -1,4 +1,4 @@
-
+import 'package:universal_html/html.dart' as html;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:training_management_system/components/screen_size.dart';
@@ -28,7 +28,7 @@ class BatchInformationTrainer extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      onMenuItemSelected(TrainerMenuItem.ClassRoom);
+                      onMenuItemSelected(TrainerMenuItem.classroom);
                     },
                     child: buildDashboardCard(
                       title: 'Classroom',
@@ -37,7 +37,9 @@ class BatchInformationTrainer extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () {onMenuItemSelected(TrainerMenuItem.Notice);},
+                    onTap: () {
+                      onMenuItemSelected(TrainerMenuItem.Notice);
+                      },
                     child: buildDashboardCard(
                       title: 'Notice',
                       subtitle: 'See Important Notice ',
@@ -46,7 +48,8 @@ class BatchInformationTrainer extends StatelessWidget {
                   ),
                   InkWell(
                     onTap: () {
-                     onMenuItemSelected(TrainerMenuItem.AssignmentTrainer);
+                      //saveTrainerInLocalStorage()
+                      onMenuItemSelected(TrainerMenuItem.AssignmentTrainer);
                     },
                     child: buildDashboardCard(
                       title: 'Assignment',
@@ -100,6 +103,17 @@ class BatchInformationTrainer extends StatelessWidget {
     );
   }
 }
+
+void saveTrainerInLocalStorage(String trainerId) {
+  final storage = html.window.localStorage;
+  storage['trainerId'] = trainerId;
+}
+String? getTrainerIdFromLocalStorage() {
+  final storage = html.window.localStorage;
+  return storage['trainerId'];
+
+}
+
 
 
 Widget buildDashboardCard({required String title, required String subtitle, required BuildContext context}) {

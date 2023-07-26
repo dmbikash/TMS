@@ -14,7 +14,9 @@ enum TraineeMenuItem {
   course,
   batchDetailsPage,
   schedule,
-  assignmentTrainee
+  assignmentTrainee,
+  notice,
+  classroom
 }
 
 class TraineeMenuWidget extends StatelessWidget {
@@ -92,6 +94,8 @@ class TraineeMenuWidget extends StatelessWidget {
                       traineeMenuProvider.onClickSideMenu(1);
                       traineeMenuProvider.saveRoleToLocalStorage("");
                       traineeMenuProvider.saveTokenToLocalStorage("");
+                      traineeMenuProvider.saveBatchIdInLocalStorage("");
+                      traineeMenuProvider.saveTraineeIdInLocalStorage("");
                       Navigator.pushReplacementNamed(context, "/");
                     },
                     child: Padding(

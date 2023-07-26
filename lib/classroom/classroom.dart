@@ -9,14 +9,14 @@ import 'package:training_management_system/provider/classroom_provider.dart';
 
 import '../components/color.dart';
 
-class ClassRoomPage extends StatefulWidget {
-  const ClassRoomPage({Key? key}) : super(key: key);
+class ClassroomPage extends StatefulWidget {
+  const ClassroomPage({Key? key}) : super(key: key);
 
   @override
-  State<ClassRoomPage> createState() => _ClassRoomPageState();
+  State<ClassroomPage> createState() => _ClassroomPageState();
 }
 
-class _ClassRoomPageState extends State<ClassRoomPage> {
+class _ClassroomPageState extends State<ClassroomPage> {
 
   final commentData = TextEditingController();
   int a = 5;
@@ -40,39 +40,30 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-           // color: Colors.green,
             height: height(context),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // TextButton(
-                  //   onPressed: () {
-                  //     setState(() {
-                  //       a=a+1;
-                  //     });
-                  //   },
-                  //   child: Text("press $a"),
-                  //
-                  // ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "ClassRoom",
+                      "Classroom",
                       style:
                           TextStyle(fontWeight: FontWeight.w700, fontSize: 30),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
+
+                  ///create button based on role.........
+                  classRoomProvider.getRoleFromLocalStorage() == "TRAINER" ? Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: ElevatedButton(
                       onPressed: () {
                         QuickAlert.show(
                             onConfirmBtnTap: () {
                               if (_classRoomPostFormKey.currentState!
                                   .validate()) {
-                                print(textData.text);
                                 classRoomProvider
                                     .createPost({
                                   'textData': textData.text,
@@ -92,11 +83,12 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
                                 children: [
                                   TextFormField(
                                     validator: (val) {
-                                      if (val!.isEmpty)
+                                      if (val!.isEmpty) {
                                         return "Required";
+                                      }
                                     },
                                     controller: textData,
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                         hintText: "Write Something Here..."),
                                   ),
                                   Container(
@@ -117,7 +109,7 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
                                             },
                                             child: classRoomProvider
                                                 .assignment == null
-                                                ? Text("Select File")
+                                                ? const Text("Select File")
                                                 : Icon(
                                               Icons.check_box_rounded,
                                               color: Colors.grey,
@@ -135,10 +127,10 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
                       },
                       child: Text("Create Post"),
                     ),
-                  ),
+                  ) : const SizedBox(),
+
                   Container(
                     height: height(context) * .9,
-                    //color: Colors.lime,
                     child: FutureBuilder<List<dynamic>>(
                       future: classRoomProvider.getAllPosts(),
                       builder: (context, snapshot) {
@@ -153,10 +145,8 @@ class _ClassRoomPageState extends State<ClassRoomPage> {
                                   decoration: boxNoBorder,
                                   width: width(context) * .4,
                                   height: height(context) * .45,
-                                  //color: Colors.teal[800],
                                   child: Row(
                                     children: [
-                                      /////////////////////// bam diker kolam
                                       Expanded(
                                         flex: 1,
                                         child: Column(
