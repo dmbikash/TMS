@@ -28,6 +28,8 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
+  @override
+
   bool flag = false;
   final _middleContentWidgetKey = GlobalKey<_MiddleContentWidgetState>();
 
@@ -100,102 +102,6 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: flag ?Container(
-      height: 100,
-      width: 200,
-
-      child: FloatingActionButton(
-
-        backgroundColor: Colors.black,
-        child: Text("ADD BATCH",style: sweet20,),
-        onPressed: () {
-          // QuickAlert.show(
-          //     onConfirmBtnTap: (){
-          //       if(_batchFormKey.currentState!.validate()){
-          //         adminProvider.postBatch({
-          //           'name': _batchName.text,
-          //           'start_date': _startDateController.text,
-          //           'end_date': _endDateController.text,
-          //         },
-          //             context
-          //         );
-          //       }
-          //     },
-          //     context: context,
-          //     type: QuickAlertType.info,
-          //     confirmBtnColor: sweetYellow,
-          //     confirmBtnText: "Create",
-          //     title: "Batch Info",
-          //     //customAsset: FlutterLogo(),
-          //
-          //     widget: Form(
-          //       key: _batchFormKey,
-          //       child: Column(
-          //         children: [
-          //           TextFormField(
-          //             validator: (val){
-          //               if(val!.isEmpty) return "value des nai oak thu";
-          //             },
-          //             controller: _batchName,
-          //             decoration: InputDecoration(hintText: "Batch Name"),
-          //           ),
-          //           Container(
-          //             height: 100,
-          //             width: 500,
-          //             //color: Colors.red,
-          //             child: Row(
-          //               children: [
-          //                 Expanded(
-          //                   flex: 1,
-          //                   child: TextFormField(
-          //                     validator: (val){
-          //                       if(val!.isEmpty) return "value des nai oak thu";
-          //                     },
-          //                     controller: _startDateController,
-          //                     readOnly: true,
-          //                     // Make the field read-only to prevent manual input
-          //                     onTap: () => _selectStartDate(context),
-          //                     decoration: const InputDecoration(
-          //                       labelText: 'Start Date',
-          //                       hintText: 'Select a date',
-          //                       suffixIcon: Icon(Icons.calendar_today),
-          //                       border: OutlineInputBorder(),
-          //                     ),
-          //                   ),
-          //                 ),
-          //                 const SizedBox(
-          //                   width: 100,
-          //                 ),
-          //                 Expanded(
-          //                   flex: 1,
-          //                   child: TextFormField(
-          //                     validator: (val){
-          //                       if(val!.isEmpty) return "value des nai oak thu";
-          //                     },
-          //                     controller: _endDateController,
-          //                     readOnly: true,
-          //                     onTap: () => _selectEndDate(context),
-          //                     decoration: const InputDecoration(
-          //                       labelText: 'End Date',
-          //                       hintText: 'Select an end date',
-          //                       suffixIcon: Icon(Icons.calendar_today),
-          //                       border: OutlineInputBorder(),
-          //                     ),
-          //                   ),
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //           // TextFormField(),
-          //           //TextFormField(),
-          //         ],
-          //       ),
-          //     ));
-        },
-
-      ),
-    )
-      : Container(),
 
      //appBar: AppBar(title: const Text('Dynamic Content Switching')),
       body: Row(
@@ -208,7 +114,7 @@ class _LandingScreenState extends State<LandingScreen> {
           // Middle content section
           Expanded(
             flex: 3,
-            child: MiddleContentWidget(key: _middleContentWidgetKey),
+            child: MiddleContentWidget(key: _middleContentWidgetKey, onMenuItemSelected: onMenuItemSelected,),
           ),
           // Last section
           Expanded(
@@ -224,14 +130,27 @@ class _LandingScreenState extends State<LandingScreen> {
 
 ///   DYNAMIC MID SECTION
 
+
 class MiddleContentWidget extends StatefulWidget {
-  MiddleContentWidget({Key? key}) : super(key: key);
+  final void Function(MenuItem) onMenuItemSelected;
+
+  MiddleContentWidget({
+    Key? key,
+    required this.onMenuItemSelected,
+  }) : super(key: key);
 
   @override
   _MiddleContentWidgetState createState() => _MiddleContentWidgetState();
 }
 
 class _MiddleContentWidgetState extends State<MiddleContentWidget> {
+  @override
+  void initState() {
+    CardsOfBatchInfo cardsOfBatchInfo = CardsOfBatchInfo();
+    changeContent(BatchList(onMenuItemSelected: widget.onMenuItemSelected,));
+    super.initState();
+  }
+
   Widget _currentContent = Container(
     child:  Center(
       child: SingleChildScrollView(

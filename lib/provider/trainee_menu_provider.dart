@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class TraineeMenuProvider with ChangeNotifier{
-  bool profile = true;
-  bool batch = false;
+  bool profile = false;
+  bool batch = true;
   bool logout = false;
 
   void onClickSideMenu(int c){

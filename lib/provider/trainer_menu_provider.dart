@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:universal_html/html.dart' as html;
 
 class TrainerMenuProvider with ChangeNotifier{
-  bool profile = true;
-  bool batch = false;
+  bool profile = false;
+  bool batch = true;
   bool logout = false;
 
   void onClickSideMenu(int c){
