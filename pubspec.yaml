@@ -50,6 +50,7 @@ dependencies:
   file_picker: ^5.3.2
   modal_bottom_sheet: ^2.1.2
   url_launcher: ^6.1.12
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:

@@ -1,17 +1,21 @@
 import 'dart:convert';
+//import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-
+import '../components/quickAlert.dart';
 class LoginProvider with ChangeNotifier {
   String role = "xx";
   int userId = -1;
   int statusCode = 500;
 
-  Future<void> get_role(String email, String password) async {
+  Future<void> get_role(String email, String password, BuildContext context) async {
     const url1 = "http://localhost:8090/auth/login";
     final url = Uri.parse(url1);
     final headers = {
@@ -45,11 +49,19 @@ class LoginProvider with ChangeNotifier {
           }
           saveRoleToLocalStorage(role);
 
+          Noti notification = new Noti();
+          notification.noti(context, QuickAlertType.success, "Login Successfull");
+
+          //showAutoPopAlert(context);
+
           // You can access token details using decodedToken['your_key']
           // For example: decodedToken['sub'] for the subject, decodedToken['exp'] for the expiration time, etc.
         } else {
           print("Invalid token.");
         }
+
+
+
         //return decodedToken['role'][0];
       } else {
         statusCode = 500;
@@ -97,5 +109,26 @@ class LoginProvider with ChangeNotifier {
   String? getUserIdFromLocalStorage() {
     final storage = html.window.localStorage;
     return storage['userId'];
+  }
+
+  void showAutoPopAlert(BuildContext context) {
+    QuickAlert.show(
+      autoCloseDuration: Duration(seconds: 1),
+        context: context,
+        type: QuickAlertType.success,
+      width: 40,
+      text: 'Transaction Completed Successfully!',
+    );
+
+    // Fluttertoast.showToast(
+    //     msg: "Login Successful",
+    //     toastLength: Toast.LENGTH_SHORT,
+    //     gravity: ToastGravity.BOTTOM,
+    //     timeInSecForIosWeb: 1,
+    //     backgroundColor: Colors.red,
+    //     textColor: Colors.white,
+    //     fontSize: 16.0
+    // );
+
   }
 }
