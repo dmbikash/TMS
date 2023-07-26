@@ -11,8 +11,6 @@ class ScheduleProvider with ChangeNotifier {
     String? token = getTokenFromLocalStorage();
     int tempBatchId =  int.parse(getBatchIdInLocalStorage()!);
 
-    //print(tempBatchId);
-
     String url = "http://localhost:8090/course/schedule/$tempBatchId";
 
     final response = await http.get(

@@ -17,7 +17,6 @@ class ClassroomPage extends StatefulWidget {
 }
 
 class _ClassroomPageState extends State<ClassroomPage> {
-
   final commentData = TextEditingController();
   int a = 5;
 
@@ -27,8 +26,6 @@ class _ClassroomPageState extends State<ClassroomPage> {
 
   @override
   void dispose() {
-    print("tata bye bye a er value komay disi");
-    print(a);
     // TODO: implement dispose
     super.dispose();
   }
@@ -56,78 +53,81 @@ class _ClassroomPageState extends State<ClassroomPage> {
                   ),
 
                   ///create button based on role.........
-                  classRoomProvider.getRoleFromLocalStorage() == "TRAINER" ? Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        QuickAlert.show(
-                            onConfirmBtnTap: () {
-                              if (_classRoomPostFormKey.currentState!
-                                  .validate()) {
-                                classRoomProvider
-                                    .createPost({
-                                  'textData': textData.text,
-                                  'postDate': formattedDate,
-                                }, context);
-                              }
-                            },
-                            context: context,
-                            type: QuickAlertType.info,
-                            confirmBtnColor: sweetYellow,
-                            confirmBtnText: "Create",
-                            title: "Create Assignment",
-
-                            widget: Form(
-                              key: _classRoomPostFormKey,
-                              child: Column(
-                                children: [
-                                  TextFormField(
-                                    validator: (val) {
-                                      if (val!.isEmpty) {
-                                        return "Required";
-                                      }
-                                    },
-                                    controller: textData,
-                                    decoration: const InputDecoration(
-                                        hintText: "Write Something Here..."),
-                                  ),
-                                  Container(
-                                    height: 100,
-                                    width: 500,
-                                    child: Row(
+                  classRoomProvider.getRoleFromLocalStorage() == "TRAINER"
+                      ? Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              QuickAlert.show(
+                                  onConfirmBtnTap: () {
+                                    if (_classRoomPostFormKey.currentState!
+                                        .validate()) {
+                                      classRoomProvider.createPost({
+                                        'textData': textData.text,
+                                        'postDate': formattedDate,
+                                      }, context);
+                                    }
+                                  },
+                                  context: context,
+                                  type: QuickAlertType.info,
+                                  confirmBtnColor: sweetYellow,
+                                  confirmBtnText: "Create",
+                                  title: "Create Post",
+                                  widget: Form(
+                                    key: _classRoomPostFormKey,
+                                    child: Column(
                                       children: [
-
-                                        const SizedBox(
-                                          width: 100,
+                                        TextFormField(
+                                          validator: (val) {
+                                            if (val!.isEmpty) {
+                                              return "Required";
+                                            }
+                                          },
+                                          controller: textData,
+                                          decoration: const InputDecoration(
+                                              hintText:
+                                                  "Write Something Here..."),
                                         ),
-
-                                        Expanded(
-                                          flex: 1,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              classRoomProvider.pickFile(context);
-                                            },
-                                            child: classRoomProvider
-                                                .assignment == null
-                                                ? const Text("Select File")
-                                                : Icon(
-                                              Icons.check_box_rounded,
-                                              color: Colors.grey,
-                                            ),
+                                        Container(
+                                          height: 100,
+                                          width: 500,
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 100,
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    classRoomProvider
+                                                        .pickFile(context);
+                                                  },
+                                                  child: classRoomProvider
+                                                              .assignment ==
+                                                          null
+                                                      ? const Text(
+                                                          "Select File")
+                                                      : Icon(
+                                                          Icons
+                                                              .check_box_rounded,
+                                                          color: Colors.grey,
+                                                        ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
+                                        // TextFormField(),
+                                        //TextFormField(),
                                       ],
                                     ),
-                                  ),
-                                  // TextFormField(),
-                                  //TextFormField(),
-                                ],
-                              ),
-                            ));
-                      },
-                      child: Text("Create Post"),
-                    ),
-                  ) : const SizedBox(),
+                                  ));
+                            },
+                            child: Text("Create Post"),
+                          ),
+                        )
+                      : const SizedBox(),
 
                   Container(
                     height: height(context) * .9,
@@ -150,22 +150,21 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                       Expanded(
                                         flex: 1,
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [ Padding(
-                                            padding:
-                                            const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              allPosts[index]["trainerName"],
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w700,
-                                                fontSize: 30,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                allPosts[index]["trainerName"],
+                                                textAlign: TextAlign.start,
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 30,
+                                                ),
                                               ),
                                             ),
-                                          ),
-
-
                                             Padding(
                                               padding:
                                                   const EdgeInsets.all(8.0),
@@ -175,34 +174,46 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                               ),
                                             ),
                                             SizedBox(
-                                              height: height(context)*.25,
+                                              height: height(context) * .25,
                                             ),
-                                            if(allPosts[index]["filePath"] != null )Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                children: [
-                                                  Text("Attatchments",style: TextStyle(fontWeight: FontWeight.w600),),
-                                                  SizedBox(width: 10,),
-                                                  IconButton(
-                                                    onPressed: (){
-                                                      classRoomProvider.downloadFile("http://localhost:8090/classroom/download/${allPosts[index]["postId"]}");
-                                                    },
-                                                      icon:Icon(Icons.attachment)),
-                                                ],
+                                            if (allPosts[index]["filePath"] !=
+                                                null)
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Attatchments",
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    IconButton(
+                                                        onPressed: () {
+                                                          classRoomProvider
+                                                              .downloadFile(
+                                                                  "http://localhost:8090/classroom/download/${allPosts[index]["postId"]}");
+                                                        },
+                                                        icon: Icon(
+                                                            Icons.attachment)),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
                                           ],
                                         ),
                                       ),
-                                      ///////////////////////////////// dan diker kolam
                                       Expanded(
                                         flex: 1,
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             InkWell(
                                               onTap: () {
-                                                print("tap-$a");
                                                 showDialog(
                                                     context: context,
                                                     builder: (context) {
@@ -212,25 +223,15 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                                         child: Column(
                                                           children: [
                                                             Container(
-                                                              ////////////////////////          commewnts here
-                                                              height: height(
-                                                                      context) *
-                                                                  .7,
-                                                              width: width(
-                                                                      context) *
-                                                                  .5,
+                                                              height: height(context) * .7,
+                                                              width: width(context) *.5,
                                                               color: Colors
                                                                   .deepPurple,
                                                               child: ListView
                                                                   .builder(
-                                                                      itemCount:
-                                                                          allPosts[index]["comments"]
-                                                                              .length,
-                                                                      itemBuilder:
-                                                                          (context,
-                                                                              commentIndex) {
-                                                                        var comment =
-                                                                            allPosts[index]["comments"][commentIndex];
+                                                                      itemCount: allPosts[index]["comments"].length,
+                                                                      itemBuilder: (context, commentIndex) {
+                                                                        var comment = allPosts[index]["comments"][commentIndex];
                                                                         return Column(
                                                                           crossAxisAlignment:
                                                                               CrossAxisAlignment.start,
@@ -257,7 +258,6 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                                                       }),
                                                             ),
                                                             Container(
-                                                              ////////////////////////          commewnt's intuput here
                                                               height: height(
                                                                       context) *
                                                                   .09,
@@ -270,23 +270,24 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                                                         8.0),
                                                                 child:
                                                                     TextFormField(
-                                                                      controller: commentData,
+                                                                  controller:
+                                                                      commentData,
                                                                   decoration:
                                                                       InputDecoration(
                                                                           suffix:
                                                                               TextButton(
                                                                             onPressed:
                                                                                 () {
-                                                                              if(commentData.text != ""){
+                                                                              if (commentData.text != "") {
                                                                                 var commentDataMap = {
                                                                                   "commentData": commentData.text,
                                                                                   "postId": allPosts[index]["postId"],
                                                                                 };
                                                                                 classRoomProvider.createComment(commentDataMap, context);
-                                                                                commentData.text= "";
+                                                                                commentData.text = "";
                                                                                 Navigator.pop(context);
                                                                               }
-                                                                                },
+                                                                            },
                                                                             child:
                                                                                 Text("POST"),
                                                                           ),
@@ -306,12 +307,11 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                                     });
                                               },
                                               child: Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
                                                 child: Container(
-                                                  ////////////////////////          commewnts here
                                                   height: height(context) * .30,
                                                   width: width(context),
-                                                  //color: Colors.deepPurple,
                                                   decoration: boxNoBorder2,
                                                   child: ListView.builder(
                                                       itemCount: allPosts[index]
@@ -336,8 +336,12 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                                                 children: [
                                                                   Icon(Icons
                                                                       .supervised_user_circle),
-                                                                  Text(comment["name"] ,
-                                                                  style: TextStyle(fontWeight: FontWeight.w600),
+                                                                  Text(
+                                                                    comment[
+                                                                        "name"],
+                                                                    style: TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight.w600),
                                                                   ),
                                                                 ],
                                                               ),
@@ -346,9 +350,13 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                                               padding:
                                                                   const EdgeInsets
                                                                       .all(8.0),
-                                                              child: Text(comment[
-                                                                  "commentData"],
-                                                              style: TextStyle(color: Colors.black54),),
+                                                              child: Text(
+                                                                comment[
+                                                                    "commentData"],
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black54),
+                                                              ),
                                                             ),
                                                             Padding(
                                                               padding:
@@ -363,28 +371,40 @@ class _ClassroomPageState extends State<ClassroomPage> {
                                               ),
                                             ),
                                             Container(
-                                              ////////////////////////          commewnt's intuput here
                                               height: height(context) * .09,
-                                             // color: Colors.white60,
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
                                                 child: TextFormField(
                                                   controller: commentData,
                                                   decoration: InputDecoration(
-
-                                                    fillColor: Colors.deepPurple,
+                                                      fillColor:
+                                                          Colors.deepPurple,
                                                       hoverColor: Colors.green,
-                                                      focusColor: Colors.blueAccent,
+                                                      focusColor:
+                                                          Colors.blueAccent,
                                                       suffix: TextButton(
                                                         onPressed: () {
-                                                          if(commentData.text != ""){
-                                                            var commentDataMap = {
-                                                              "commentData": commentData.text,
-                                                              "postId": allPosts[index]["postId"],
+                                                          if (commentData
+                                                                  .text !=
+                                                              "") {
+                                                            var commentDataMap =
+                                                                {
+                                                              "commentData":
+                                                                  commentData
+                                                                      .text,
+                                                              "postId":
+                                                                  allPosts[
+                                                                          index]
+                                                                      [
+                                                                      "postId"],
                                                             };
-                                                            classRoomProvider.createComment(commentDataMap, context);
-                                                            commentData.text= "";
+                                                            classRoomProvider
+                                                                .createComment(
+                                                                    commentDataMap,
+                                                                    context);
+                                                            commentData.text =
+                                                                "";
                                                           }
                                                         },
                                                         child: Text("POST"),
@@ -412,9 +432,9 @@ class _ClassroomPageState extends State<ClassroomPage> {
                           );
                         }
                         if (snapshot.hasError) {
-                          return Text("snpashot e error ${snapshot.error}");
+                          return Text("snapshot error ${snapshot.error}");
                         }
-                        return Text("SOMETHIng WENT GOLMAL");
+                        return Text("something went wrong");
                       },
                     ),
                   ),

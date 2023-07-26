@@ -13,7 +13,6 @@ import '../screen/dashboad/dashboard_components/admin_side_menu.dart';
 
 enum TrainerMenuItem {
   profile,
-  logout,
   batch,
   batchInfo,
   AssignmentTrainer,
@@ -35,7 +34,6 @@ class TrainerMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<TrainerMenuProvider>(builder: (context, trainerMenuProvider, child){
       return Container(
-        //height: 100,
         color: primary,
 
         child:Padding(
@@ -86,7 +84,6 @@ class TrainerMenuWidget extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        //decoration: box12Sidebar,
                         child: TextLiquidFill(
                           text: 'Batch',
                           waveColor: trainerMenuProvider.batch? Colors.white : sweetYellow,

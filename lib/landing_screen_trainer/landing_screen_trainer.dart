@@ -7,7 +7,6 @@ import '../classroom/classroom.dart';
 import '../menu/trainer_menu_item.dart';
 import '../notice/notice.dart';
 import '../screen/batch/batch_details.dart';
-import '../screen/page1_aluu.dart';
 import '../trainer_screen/assignment_trainer.dart';
 import '../trainer_screen/batch_information_trainer.dart';
 import '../trainer_screen/batches_of_trainer.dart';
@@ -69,9 +68,6 @@ class _LandingScreenTrainerState extends State<LandingScreenTrainer> {
       case TrainerMenuItem.profile:
         _middleContentWidgetKey.currentState?.changeContent(TrainerProfile());
         break;
-      case TrainerMenuItem.logout:
-        _middleContentWidgetKey.currentState?.changeContent(ALUUContent());
-        break;
 
 
     // Add cases for other menu items
@@ -129,7 +125,7 @@ class _MiddleContentWidgetState extends State<MiddleContentWidget> {
             //   width: double.infinity,
             //   color: sweetYellow,
             // ),
-            Text("I LOVE KHALISI"),
+            Text("I LOVE yoyoyoyooy         KHALISI"),
             SizedBox(height: 500,),
             Text("I LOVE KHALISI"),
             SizedBox(height: 500,),

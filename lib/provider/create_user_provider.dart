@@ -156,25 +156,17 @@ class CreateUserProvider with ChangeNotifier{
     if (response.statusCode == 200) {
       String responseString = await response.stream.bytesToString();
       var jsonResponse = jsonDecode(responseString);
-      print(jsonResponse);
-      print('Data posted successfully');
-      //Navigator.pop(context);
       QuickAlert.show(width: 100,
-
         context: context,
         type: QuickAlertType.success,
-      ); // That's it to display an alert, use other properties to customize.
+      );
     } else {
       String responseString = await response.stream.bytesToString();
       var jsonResponse = jsonDecode(responseString);
-      print(jsonResponse);
-      print(response.statusCode);
-      //Navigator.pop(context);
-      QuickAlert.show(width: 100,
+      QuickAlert.show(
+        width: 10,
         text: jsonResponse["errorMessage"],
         context: context,
-        showCancelBtn: false,
-        confirmBtnColor: Colors.white,
         type: QuickAlertType.error,
       );
 
@@ -185,7 +177,6 @@ class CreateUserProvider with ChangeNotifier{
     final storage = html.window.localStorage;
     return storage['token'];
   }
-
 
   Future<void> pickImage(BuildContext context) async {
     try {

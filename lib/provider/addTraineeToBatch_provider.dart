@@ -8,17 +8,14 @@ class AddTraineeToBatchProvider with ChangeNotifier {
 
   List<int> selectedTrainees = [];
 
-  //get http => null;
-  final http.Client _httpClient = http.Client();
-
-  void addToSelectedTrainees(int c){
-    selectedTrainees.add(c);
-    notifyListeners();
-  }
-
-  bool isSelected(int c){
-    return selectedTrainees.contains(c);
-  }
+  // void addToSelectedTrainees(int c){
+  //   selectedTrainees.add(c);
+  //   notifyListeners();
+  // }
+  //
+  // bool isSelected(int c){
+  //   return selectedTrainees.contains(c);
+  // }
 
   Future<List<dynamic>> getTrainees() async {
 

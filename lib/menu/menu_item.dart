@@ -10,15 +10,11 @@ import '../components/text_style.dart';
 import '../screen/dashboad/dashboard_components/admin_side_menu.dart';
 
 enum MenuItem {
-  aluu,
-  potol,
-  profile,
+  //profile,
   createTrainee,
   createTrainer,
   createAdmin,
-  batch,
-  logout,
-  Batchdekhabo,
+ // batch,
   BatchList,
   BatchInformation,
   AddTraineeToBatch,
@@ -27,7 +23,6 @@ enum MenuItem {
   CourseInfoPage
 
 }
-
 
 
 class MenuWidget extends StatelessWidget {
@@ -39,15 +34,12 @@ class MenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Menuprovider>(builder: (context, menuProvider, child){
       return Container(
-        //height: 100,
         color: primary,
 
         child:Padding(
           padding: const EdgeInsets.symmetric(horizontal: 38.0),
           child: Container(
             height: height(context) ,
-            //decoration: box12Sidebar,
-            //color: Colors.orangeAccent,
             child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -90,7 +82,6 @@ class MenuWidget extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        //decoration: box12Sidebar,
                         child: TextLiquidFill(
                           text: 'BATCH',
                           waveColor: menuProvider.batch? Colors.white : sweetYellow,
@@ -102,12 +93,9 @@ class MenuWidget extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-
-
                     onTap: (){
                       menuProvider.onClickSideMenu(3);
                       onMenuItemSelected(MenuItem.createAdmin);
-                      //Navigator.pushNamed(context, "TraineeRegister");
                     },
                     child: Padding(padding: const EdgeInsets.all(8.0),
                       child: Container(
@@ -189,56 +177,3 @@ class MenuWidget extends StatelessWidget {
   }
 }
 
-// Column(
-// crossAxisAlignment: CrossAxisAlignment.center,
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// ElevatedButton(
-// onPressed: () => onMenuItemSelected(MenuItem.aluu),
-// child: Text('profile'),
-// ),
-// SizedBox(
-// height: 20,
-// ),
-// ElevatedButton(
-// onPressed: () => onMenuItemSelected(MenuItem.aluu),
-// child: Text('ALU'),
-// ),
-// SizedBox(
-// height: 20,
-// ),
-// ElevatedButton(
-// onPressed: () => onMenuItemSelected(MenuItem.aluu),
-// child: Text('ALU'),
-// ),
-// SizedBox(
-// height: 20,
-// ),
-// ElevatedButton(
-// onPressed: () => onMenuItemSelected(MenuItem.aluu),
-// child: Text('ALU'),
-// ),
-// SizedBox(
-// height: 20,
-// ),
-// ElevatedButton(
-// onPressed: () => onMenuItemSelected(MenuItem.aluu),
-// child: Text('ALU'),
-// ),
-// SizedBox(
-// height: 20,
-// ),
-// ElevatedButton(
-// onPressed: () => onMenuItemSelected(MenuItem.aluu),
-// child: Text('ALU'),
-// ),
-// SizedBox(
-// height: 20,
-// ),
-// ElevatedButton(
-// onPressed: () => onMenuItemSelected(MenuItem.potol),
-// child: Text('Potol'),
-// ),
-// // Add more menu items here
-// ],
-// ),

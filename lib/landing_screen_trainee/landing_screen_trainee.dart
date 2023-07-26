@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:training_management_system/classroom/classroom.dart';
 import 'package:training_management_system/notice/notice.dart';
-import 'package:training_management_system/provider/assignment_trainer_provider.dart';
 import 'package:training_management_system/screen/batch/batch_details.dart';
-import 'package:training_management_system/screen/page1_aluu.dart';
 import 'package:training_management_system/trainee_screen/assignment_trainee.dart';
 import 'package:training_management_system/trainee_screen/batch_information_trainee.dart';
 import 'package:training_management_system/trainee_screen/course_info_trainee.dart';
@@ -22,7 +20,9 @@ class LandingScreenTrainee extends StatefulWidget {
 
 class _LandingScreenTraineeState extends State<LandingScreenTrainee> {
 
+
   final _middleContentWidgetKey = GlobalKey<_MiddleContentWidgetState>();
+
 
 
   // Function to handle menu item selection
@@ -61,20 +61,14 @@ class _LandingScreenTraineeState extends State<LandingScreenTrainee> {
       case TraineeMenuItem.profile:
         _middleContentWidgetKey.currentState?.changeContent(TraineeProfile());
         break;
-      case TraineeMenuItem.logout:
-        _middleContentWidgetKey.currentState?.changeContent(ALUUContent());
-        break;
 
 
-    // Add cases for other menu items
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      //appBar: AppBar(title: const Text('Dynamic Content Switching')),
       body: Row(
         children: [
           // Menu section

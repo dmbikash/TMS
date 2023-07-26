@@ -9,7 +9,6 @@ import '../provider/trainee_menu_provider.dart';
 
 enum TraineeMenuItem {
   profile,
-  logout,
   batch,
   course,
   batchDetailsPage,

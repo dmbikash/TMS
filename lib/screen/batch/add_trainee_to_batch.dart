@@ -26,7 +26,7 @@ class AddTraineeToBatch extends StatelessWidget {
             future: addTraineeToBatchProvider.getTrainees(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                print("nai kichu");
+                print("null");
                 return CircularProgressIndicator();
               } else {
                 return SingleChildScrollView(
@@ -60,7 +60,7 @@ class AddTraineeToBatch extends StatelessWidget {
                         DataCell(
                           IconButton(
                             onPressed: () {
-                              addTraineeToBatchProvider.addToSelectedTrainees(trainee["traineeId"]);
+                              //addTraineeToBatchProvider.addToSelectedTrainees(trainee["traineeId"]);
                               var batchInfo = {
                                 "traineeId": trainee["traineeId"],
                                 "batchId": int.parse(getBatchIdInLocalStorage()!),

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -133,11 +132,9 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           _animationController.forward().then((_) async {
-                            //await loginProvider.get_role(_email.text, _password.text);
                             await loginProvider.get_role(_email.text,_password.text, context);
 
                             if (loginProvider.role == "TRAINEE" && loginProvider.statusCode== 200) {
-                              Navigator.pushReplacementNamed(context, "AdminHome",);
                               Future.delayed(Duration(seconds: 1), (){
                                 Navigator.pushReplacementNamed(context, "LandingScreenTrainee");
                               });

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-///   LAST SECTION
+
 
 
 class LastContentWidget extends StatefulWidget {

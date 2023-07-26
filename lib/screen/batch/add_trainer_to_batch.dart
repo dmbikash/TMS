@@ -61,7 +61,7 @@ class AddTrainerToBatch extends StatelessWidget {
                           DataCell(
                             IconButton(
                               onPressed: () {
-                                addTrainerToBatchProvider.addToSelectedTrainers(trainer["trainerId"]);
+                                //addTrainerToBatchProvider.addToSelectedTrainers(trainer["trainerId"]);
                                 var batchInfo = {
                                   "trainerId": trainer["trainerId"],
                                   "batchId": int.parse(getBatchIdInLocalStorage()!),
