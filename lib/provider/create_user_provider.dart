@@ -7,6 +7,8 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:universal_html/html.dart' as html;
 class CreateUserProvider with ChangeNotifier{
 
@@ -118,7 +120,7 @@ class CreateUserProvider with ChangeNotifier{
     }
   }
 
-  Future<void> createTrainer(var trainerData) async {
+  Future<void> createTrainer(var trainerData, BuildContext context) async {
 
     String? token = getTokenFromLocalstorage();
     String? url = 'http://localhost:8090/auth/register';
@@ -157,8 +159,25 @@ class CreateUserProvider with ChangeNotifier{
       print(jsonResponse);
       print('Data posted successfully');
       //Navigator.pop(context);
+      QuickAlert.show(width: 100,
+
+        context: context,
+        type: QuickAlertType.success,
+      ); // That's it to display an alert, use other properties to customize.
     } else {
-      print('Error occurred while posting data: ${response.statusCode}');
+      String responseString = await response.stream.bytesToString();
+      var jsonResponse = jsonDecode(responseString);
+      print(jsonResponse);
+      print(response.statusCode);
+      //Navigator.pop(context);
+      QuickAlert.show(width: 100,
+        text: jsonResponse["errorMessage"],
+        context: context,
+        showCancelBtn: false,
+        confirmBtnColor: Colors.white,
+        type: QuickAlertType.error,
+      );
+
     }
   }
 

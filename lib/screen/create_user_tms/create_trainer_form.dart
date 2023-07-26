@@ -26,7 +26,7 @@ class CreateTrainerForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<CreateUserProvider>(
-        builder: (a,createUserProvider,c,){
+        builder: (context,createUserProvider,child,){
           return Form(
             key: createTrainerFormKey,
             child: SingleChildScrollView(
@@ -238,7 +238,7 @@ class CreateTrainerForm extends StatelessWidget {
                               "role": "TRAINER",
                             };
 
-                            createUserProvider.createTrainer(trainerData);
+                            createUserProvider.createTrainer(trainerData , context);
                           }
                         },
                         style: ElevatedButton.styleFrom(

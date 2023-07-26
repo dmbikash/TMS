@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:quickalert/quickalert.dart';
 import "package:universal_html/html.dart" as html;
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
@@ -20,6 +21,7 @@ class CourseInfoTrainerTraineeProvider with ChangeNotifier {
 
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
+
       return data;
     }
     return [];
