@@ -89,7 +89,7 @@ class _LandingScreenTrainerState extends State<LandingScreenTrainer> {
           // Middle content section
           Expanded(
             flex: 3,
-            child: MiddleContentWidget(key: _middleContentWidgetKey),
+            child: MiddleContentWidget(key: _middleContentWidgetKey, onMenuItemSelected: onTrainerMenuItemSelected, ),
           ),
           // Last section
           Expanded(
@@ -106,13 +106,23 @@ class _LandingScreenTrainerState extends State<LandingScreenTrainer> {
 ///   DYNAMIC MID SECTION
 
 class MiddleContentWidget extends StatefulWidget {
-  MiddleContentWidget({Key? key}) : super(key: key);
+  final void Function(TrainerMenuItem) onMenuItemSelected;
+  MiddleContentWidget({Key? key,
+    required this.onMenuItemSelected,
+  }) : super(key: key);
 
   @override
   _MiddleContentWidgetState createState() => _MiddleContentWidgetState();
 }
 
 class _MiddleContentWidgetState extends State<MiddleContentWidget> {
+  @override
+  void initState() {
+
+    changeContent(BatchInformationTrainer(onMenuItemSelected: widget.onMenuItemSelected,));
+    super.initState();
+  }
+
 
   Widget _currentContent = Container(
     child:  Center(

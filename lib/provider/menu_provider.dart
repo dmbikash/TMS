@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:universal_html/html.dart' as html;
 
 class Menuprovider with ChangeNotifier{
-  bool profile = true;
-  bool batch = false;
+  bool profile = false;
+  bool batch = true;
   bool createAD = false;
   bool createTR = false;
   bool createTE = false;

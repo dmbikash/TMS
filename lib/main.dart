@@ -23,12 +23,10 @@ import 'package:training_management_system/provider/trainee_dashboard_provider.d
 import 'package:training_management_system/provider/trainee_menu_provider.dart';
 import 'package:training_management_system/provider/trainer_dashboard_provider.dart';
 import 'package:training_management_system/provider/trainer_menu_provider.dart';
+import 'package:training_management_system/provider/trainer_profile.dart';
 import 'package:training_management_system/screen/batch/add_trainee_to_batch_old.dart';
 import 'package:training_management_system/screen/batch/add_trainer_to_batch_old.dart';
-import 'package:training_management_system/screen/dashboad/admin_dashboard.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:training_management_system/screen/dashboad/trainee_dashboard.dart';
-import 'package:training_management_system/screen/dashboad/trainer_dashboard.dart';
 import 'package:training_management_system/screen/log_reg/login.dart';
 import 'package:training_management_system/trainer_screen/submission_list.dart';
 import 'landing_screen/landing_screen.dart';
@@ -61,6 +59,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => TraineeMenuProvider()),
       ChangeNotifierProvider(create: (_) => BatchInfoTraineeProvider()),
       ChangeNotifierProvider(create: (_) => NoticeProvider()),
+      ChangeNotifierProvider(create: (_) => TrainerProfileProvider()),
 
 
 
@@ -73,7 +72,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -90,15 +88,12 @@ class MyApp extends StatelessWidget {
 
         'AdminHome': (context) => LandingScreen(),
         'LandingScreenTrainer': (context) => LandingScreenTrainer(),
-
-        'AdminDashboard': (context) => AdminDashboard(),
-        'TraineeDashboard': (context) => TraineeDashboard(),
-        'TrainerDashboard' : (context) => TrainerDashboard(),
+        'LandingScreenTrainee': (context) => LandingScreenTrainee(),
 
         'AddTrainerToBatch' : (context) => AddTrainerToBatchOld(),
         'AddTraineeToBatch' : (context) => AddTraineeToBatchOld(),
         'SubmissionList' : (context) => SubmissionList(),
-        'LandingScreenTrainee': (context) => LandingScreenTrainee(),
+
 
       },
     );

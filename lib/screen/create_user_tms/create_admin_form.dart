@@ -28,19 +28,6 @@ class CreateAdminForm extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 80, 0, 0),
-            child: Container(
-              child: TextLiquidFill(
-                text: 'Register Admin',
-                waveColor: sweetYellow,
-                boxBackgroundColor: Colors.black,
-                textStyle: black20,
-                boxHeight: 50,
-                boxWidth: 200,
-              ),
-            ),
-          ),
           Form(
             key: createAdminFormKey,
             child: SingleChildScrollView(

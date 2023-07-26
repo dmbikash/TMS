@@ -13,10 +13,8 @@ class _LastContentWidgetState extends State<LastContentWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blueGrey,
-      child: Center(
-        child: Text('RIGHT SIDE ER SECTION'),
-      ),
+      color: Colors.white,
+
     );
   }
 }

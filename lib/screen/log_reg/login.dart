@@ -135,11 +135,12 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                             await loginProvider.get_role(_email.text,_password.text, context);
 
                             if (loginProvider.role == "TRAINEE" && loginProvider.statusCode== 200) {
+
                               Future.delayed(Duration(seconds: 1), (){
                                 Navigator.pushReplacementNamed(context, "LandingScreenTrainee");
                               });
                             } else if (loginProvider.role == "ADMIN" && loginProvider.statusCode== 200) {
-                              Navigator.pushReplacementNamed(context, "AdminHome",);
+                              //Navigator.pushReplacementNamed(context, "AdminHome",);
                               Future.delayed(Duration(seconds: 1), (){
                                     Navigator.pushReplacementNamed(context, "AdminHome",);
                               });
@@ -147,7 +148,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                               Future.delayed(const Duration(seconds: 1), () {
                                 Navigator.pushReplacementNamed(context, "LandingScreenTrainer");
                               });
-                             // Navigator.pushReplacementNamed(context, "LandingScreenTrainer");
+
                             } else {
                               print("Invalid role");
                             }
@@ -180,22 +181,3 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
     );
   }
 }
-
-// InkWell(
-//   onTap: (){
-//     createUserProvider.clickOnSideMenu(1);
-//   },
-//   child: Padding(
-//     padding: const EdgeInsets.all(8.0),
-//     child: Container(
-//       //decoration: box12Sidebar,
-//       child: TextLiquidFill(
-//         text: 'CREATE ADMIN',
-//         waveColor: sweetYellow,
-//         boxBackgroundColor: Colors.black,
-//         textStyle: black20,
-//         boxHeight: 70,
-//       ),
-//     ),
-//   ),
-// ),

@@ -23,6 +23,8 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
+  @override
+
   bool flag = false;
   final _middleContentWidgetKey = GlobalKey<_MiddleContentWidgetState>();
 
@@ -83,6 +85,7 @@ class _LandingScreenState extends State<LandingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       floatingActionButton: flag ?Container(
       height: 100,
       width: 200,
@@ -99,6 +102,7 @@ class _LandingScreenState extends State<LandingScreen> {
     )
       : Container(),
 
+
      //appBar: AppBar(title: const Text('Dynamic Content Switching')),
       body: Row(
         children: [
@@ -110,7 +114,7 @@ class _LandingScreenState extends State<LandingScreen> {
           // Middle content section
           Expanded(
             flex: 3,
-            child: MiddleContentWidget(key: _middleContentWidgetKey),
+            child: MiddleContentWidget(key: _middleContentWidgetKey, onMenuItemSelected: onMenuItemSelected,),
           ),
           // Last section
           Expanded(
@@ -126,14 +130,27 @@ class _LandingScreenState extends State<LandingScreen> {
 
 ///   DYNAMIC MID SECTION
 
+
 class MiddleContentWidget extends StatefulWidget {
-  MiddleContentWidget({Key? key}) : super(key: key);
+  final void Function(MenuItem) onMenuItemSelected;
+
+  MiddleContentWidget({
+    Key? key,
+    required this.onMenuItemSelected,
+  }) : super(key: key);
 
   @override
   _MiddleContentWidgetState createState() => _MiddleContentWidgetState();
 }
 
 class _MiddleContentWidgetState extends State<MiddleContentWidget> {
+  @override
+  void initState() {
+    CardsOfBatchInfo cardsOfBatchInfo = CardsOfBatchInfo();
+    changeContent(BatchList(onMenuItemSelected: widget.onMenuItemSelected,));
+    super.initState();
+  }
+
   Widget _currentContent = Container(
     child:  Center(
       child: SingleChildScrollView(

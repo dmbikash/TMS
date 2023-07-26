@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:training_management_system/provider/menu_provider.dart';
-
-import '../components/box_decorations.dart';
 import '../components/color.dart';
 import '../components/screen_size.dart';
 import '../components/text_style.dart';
 import '../provider/trainer_menu_provider.dart';
-import '../screen/dashboad/dashboard_components/admin_side_menu.dart';
+
 
 enum TrainerMenuItem {
   profile,
