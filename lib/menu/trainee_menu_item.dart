@@ -72,6 +72,7 @@ class TraineeMenuWidget extends StatelessWidget {
                   InkWell(
                     onTap: (){
                       traineeMenuProvider.onClickSideMenu(2);
+                      traineeMenuProvider.getTraineeIdByUserId();
                       onMenuItemSelected(TraineeMenuItem.batch);
 
                     },
