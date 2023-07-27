@@ -216,13 +216,6 @@ class BatchInformation extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () {},
-                    child: cardsOfBatchInfo.cards(
-                      context, 'Scheduling',
-                      'View or Add batch Schedule',
-                    ),
-                  ),
-                  InkWell(
                     onTap: () {
                       onMenuItemSelected(MenuItem.CourseInfoPage);
                     },

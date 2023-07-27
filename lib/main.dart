@@ -21,9 +21,10 @@ import 'package:training_management_system/provider/schedule_provider.dart';
 import 'package:training_management_system/provider/submission_list_provider.dart';
 import 'package:training_management_system/provider/trainee_dashboard_provider.dart';
 import 'package:training_management_system/provider/trainee_menu_provider.dart';
+import 'package:training_management_system/provider/trainee_profile_provider.dart';
 import 'package:training_management_system/provider/trainer_dashboard_provider.dart';
 import 'package:training_management_system/provider/trainer_menu_provider.dart';
-import 'package:training_management_system/provider/trainer_profile.dart';
+import 'package:training_management_system/provider/trainer_profile_provider.dart';
 import 'package:training_management_system/screen/batch/add_trainee_to_batch_old.dart';
 import 'package:training_management_system/screen/batch/add_trainer_to_batch_old.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,6 +61,8 @@ void main() {
       ChangeNotifierProvider(create: (_) => BatchInfoTraineeProvider()),
       ChangeNotifierProvider(create: (_) => NoticeProvider()),
       ChangeNotifierProvider(create: (_) => TrainerProfileProvider()),
+      ChangeNotifierProvider(create: (_) => TraineeProfileProvider()),
+
 
 
 

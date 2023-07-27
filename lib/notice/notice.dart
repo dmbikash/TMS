@@ -21,7 +21,7 @@ class Notice extends StatelessWidget {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             title: Padding(
-              padding: const EdgeInsets.only(left: 16.0),
+              padding: const EdgeInsets.fromLTRB(16, 25, 0, 20),
               child: Text(
                 "Batch Notices",
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),

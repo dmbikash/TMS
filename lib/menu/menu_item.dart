@@ -8,7 +8,6 @@ import '../components/text_style.dart';
 
 
 enum MenuItem {
-  //profile,
   createTrainee,
   createTrainer,
   createAdmin,
@@ -17,7 +16,7 @@ enum MenuItem {
   AddTraineeToBatch,
   AddTrainerToBatch,
   BatchDetailsPage,
-  CourseInfoPage
+  CourseInfoPage,
 
 }
 
@@ -54,25 +53,6 @@ class MenuWidget extends StatelessWidget {
 
                   InkWell(
                     onTap: (){
-                      menuProvider.onClickSideMenu(1);
-
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        //decoration: box12Sidebar,
-                        child: TextLiquidFill(
-                          text: 'Profile',
-                          waveColor: menuProvider.profile? Colors.white : sweetYellow,
-                          boxBackgroundColor: menuProvider.profile? secondary : Colors.black ,
-                          textStyle: black20,
-                          boxHeight: 50,
-                        ),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: (){
                       menuProvider.onClickSideMenu(2);
                       onMenuItemSelected(MenuItem.BatchList);
                     },
@@ -80,7 +60,7 @@ class MenuWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         child: TextLiquidFill(
-                          text: 'BATCH',
+                          text: 'Batch',
                           waveColor: menuProvider.batch? Colors.white : sweetYellow,
                           boxBackgroundColor: menuProvider.batch? secondary : Colors.black ,
                           textStyle: black20,
@@ -97,7 +77,7 @@ class MenuWidget extends StatelessWidget {
                     child: Padding(padding: const EdgeInsets.all(8.0),
                       child: Container(
                         child: TextLiquidFill(
-                          text: 'CREATE ADMIN',
+                          text: 'Create Admin',
                           waveColor: menuProvider.createAD? Colors.white : sweetYellow,
                           boxBackgroundColor: menuProvider.createAD? secondary : Colors.black ,
                           textStyle: black20,
@@ -115,7 +95,7 @@ class MenuWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         child: TextLiquidFill(
-                          text: 'CREATE TRAINEE',
+                          text: 'Create Trainee',
                           waveColor: menuProvider.createTE? Colors.white : sweetYellow,
                           boxBackgroundColor: menuProvider.createTE? secondary : Colors.black ,
                           textStyle: black20,
@@ -133,7 +113,7 @@ class MenuWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                         child: TextLiquidFill(
-                          text: 'CREATE TRAINER',
+                          text: 'Create Trainer',
                           waveColor: menuProvider.createTR? Colors.white : sweetYellow,
                           boxBackgroundColor: menuProvider.createTR? secondary : Colors.black ,
                           textStyle: black20,

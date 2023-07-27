@@ -71,13 +71,6 @@ class _LandingScreenState extends State<LandingScreen> {
         _middleContentWidgetKey.currentState?.changeContent(CreateTrainerForm());
         break;
 
-      // case MenuItem.profile:
-      //   _middleContentWidgetKey.currentState?.changeContent(ALUUContent());
-      //   break;
-      //
-      // case MenuItem.batch:
-      //   _middleContentWidgetKey.currentState?.changeContent(ALUUContent());
-      //   break;
 
     }
   }

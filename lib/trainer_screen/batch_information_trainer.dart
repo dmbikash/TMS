@@ -18,86 +18,105 @@ class BatchInformationTrainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<BatchInfoTrainerProvider>(
       builder: (context, batchInfoTrainerProvider, child){
-        return  Padding(
-          padding: const EdgeInsets.fromLTRB(100, 60, 0, 0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .start,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      onMenuItemSelected(TrainerMenuItem.classroom);
-                    },
-                    child: buildDashboardCard(
-                      title: 'Classroom',
-                      subtitle: 'Create post or notice',
-                      context: context,
+        return  Column(
+          children: [
+            Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Batch Information",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w900,
                     ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      onMenuItemSelected(TrainerMenuItem.Notice);
-                      },
-                    child: buildDashboardCard(
-                      title: 'Notice',
-                      subtitle: 'See Important Notice ',
-                      context: context,
+                )
+            ),
+            Expanded(
+              flex: 9,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(100, 60, 0, 0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            onMenuItemSelected(TrainerMenuItem.classroom);
+                          },
+                          child: buildDashboardCard(
+                            title: 'Classroom',
+                            subtitle: 'Create post or notice',
+                            context: context,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            onMenuItemSelected(TrainerMenuItem.Notice);
+                            },
+                          child: buildDashboardCard(
+                            title: 'Notice',
+                            subtitle: 'See Important Notice ',
+                            context: context,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            //saveTrainerInLocalStorage()
+                            onMenuItemSelected(TrainerMenuItem.AssignmentTrainer);
+                          },
+                          child: buildDashboardCard(
+                            title: 'Assignment',
+                            subtitle: 'Create Assignment',
+                            context: context,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      //saveTrainerInLocalStorage()
-                      onMenuItemSelected(TrainerMenuItem.AssignmentTrainer);
-                    },
-                    child: buildDashboardCard(
-                      title: 'Assignment',
-                      subtitle: 'Create Assignment',
-                      context: context,
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .start,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                           onMenuItemSelected(TrainerMenuItem.CourseInfoTrainer);
+                          },
+                          child: buildDashboardCard(
+                            title: 'Courses',
+                            subtitle: 'Explore Courses',
+                            context: context,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            onMenuItemSelected(TrainerMenuItem.BatchDetailsPage);
+                          },
+                          child: buildDashboardCard(
+                            title: 'Batch Details',
+                            subtitle: 'View batch Details',
+                            context: context,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            onMenuItemSelected(TrainerMenuItem.ScheduleTrainer);
+                          },
+                          child: buildDashboardCard(
+                            title: 'Schedule',
+                            subtitle: 'View batch Schedule',
+                            context: context,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .start,
-                children: [
-                  InkWell(
-                    onTap: () {
-                     onMenuItemSelected(TrainerMenuItem.CourseInfoTrainer);
-                    },
-                    child: buildDashboardCard(
-                      title: 'Courses',
-                      subtitle: 'Explore Courses',
-                      context: context,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      onMenuItemSelected(TrainerMenuItem.BatchDetailsPage);
-                    },
-                    child: buildDashboardCard(
-                      title: 'Batch Details',
-                      subtitle: 'View batch Details',
-                      context: context,
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      onMenuItemSelected(TrainerMenuItem.ScheduleTrainer);
-                    },
-                    child: buildDashboardCard(
-                      title: 'Schedule',
-                      subtitle: 'View batch Schedule',
-                      context: context,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+          ],
         );
       }
     );
